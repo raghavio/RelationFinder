@@ -48,7 +48,13 @@ wife(Wife, Man) :- female(Wife), spouse(Wife, Man).
 father(Father, Child) :- male(Father), parent(Father, _, Child).
 mother(Mother, Child) :- female(Mother), parent(_, Mother, Child).
 
+son(Son, Parent) :-
+    male(Parent), son(Son, Parent, _);
+    female(Parent), son(Son, _, Parent).
 son(Son, Father, Mother) :- male(Son), parent(Father, Mother, Son).
+daughter(Daughter, Parent) :-
+    male(Parent), daughter(Daughter, Parent, _);
+    female(Parent), daughter(Daughter, _, Parent).
 daughter(Daughter, Father, Mother) :- female(Daughter), parent(Father, Mother, Daughter).
 
 sister(Sister, Y) :-
@@ -59,11 +65,23 @@ brother(Brother, Y) :-
 father_in_law(FIL, Y) :- male(FIL), spouse(Spouse, Y), parent(FIL, _, Spouse).
 mother_in_law(MIL, Y) :- female(MIL), spouse(Spouse, Y), parent(_, MIL, Spouse).
 
+son_in_law(SIL, PIL) :-
+    male(PIL), son_in_law(SIL, PIL, _);
+    female(PIL), son_in_law(SIL, _, PIL).
 son_in_law(SIL, Father, Mother) :- male(SIL), spouse(Daughter, SIL), parent(Father, Mother, Daughter).
+daughter_in_law(DIL, PIL) :-
+    male(PIL), daughter_in_law(DIL, PIL, _);
+    female(PIL), daughter_in_law(DIL, _, PIL).
 daughter_in_law(DIL, Father, Mother) :- female(DIL), spouse(Son, DIL), parent(Father, Mother, Son).
 
+paternal_grandson(Grandson, Grandparent) :-
+    male(Grandparent), paternal_grandson(Grandson, Grandparent, _);
+    female(Grandparent), paternal_grandson(Grandson, _, Grandparent).
 paternal_grandson(Grandson, Grandfather, Grandmother) :-
     parent(Grandfather, Grandmother, Son), son(Grandson, Son, _).
+paternal_granddaughter(Granddaughter, Grandparent) :-
+    male(Grandparent), paternal_granddaughter(Granddaughter, Grandparent, _);
+    female(Grandparent), paternal_granddaughter(Granddaughter, _, Grandparent).
 paternal_granddaughter(Granddaughter, Grandfather, Grandmother) :-
     parent(Grandfather, Grandmother, Son), daughter(Granddaughter, Son, _).
 
@@ -77,8 +95,14 @@ maternal_grandfather(Grandfather, Y) :-
 maternal_grandmother(Grandmother, Y) :-
     mother(Mother, Y), mother(Grandmother, Mother).
 
+maternal_grandson(Grandson, Grandparent) :-
+    male(Grandparent), maternal_grandson(Grandson, Grandparent, _);
+    female(Grandparent), maternal_grandson(Grandson, _, Grandparent).
 maternal_grandson(Grandson, Grandfather, Grandmother) :-
     parent(Grandfather, Grandmother, Daughter), mother(Daughter, Grandson), male(Grandson).
+maternal_granddaughter(Granddaughter, Grandparent) :-
+    male(Grandparent), maternal_granddaughter(Granddaughter, Grandparent, _);
+    female(Grandparent), maternal_granddaughter(Granddaughter, _, Grandparent).
 maternal_granddaughter(Granddaughter, Grandfather, Grandmother) :-
     parent(Grandfather, Grandmother, Daughter), mother(Daughter, Granddaughter), female(Granddaughter).
 
