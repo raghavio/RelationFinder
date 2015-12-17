@@ -6,6 +6,7 @@ Time: 23:24
 To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title></title>
@@ -20,11 +21,18 @@ To change this template use File | Settings | File Templates.
         <div class="col-md-6 center-block" style="float:none">
             <div class="form-group">
                 <h4>Find relation</h4>
-                <input class="form-control" type="text" name="query" placeholder="father's mother's daughter">
+                <input class="form-control" type="text" name="query" placeholder="father's mother's daughter"
+                <c:if test="${requestScope.query != null}" >
+                    value="${requestScope.query}"
+                </c:if>>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
+            <c:if test="${requestScope.results != null}" >
+                <br>${requestScope.results}
+            </c:if>
         </div>
     </form>
+
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
