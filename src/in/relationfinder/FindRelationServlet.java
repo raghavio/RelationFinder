@@ -23,7 +23,7 @@ public class FindRelationServlet extends HttpServlet {
         String[] query = query_without_punctuation.split(" ");
 
         String contextPath = getServletContext().getResource("/WEB-INF").getPath();
-        String relation = RelationsHandler.getRelation(contextPath, query);
+        String[] relation = RelationsHandler.getRelation(contextPath, query);
 
         request.setAttribute("results", relation);
         request.setAttribute("query", raw_query);

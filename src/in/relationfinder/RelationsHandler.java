@@ -16,14 +16,15 @@ import java.util.Map;
 public class RelationsHandler {
 
     /**
-     * Gets relation by running the prolog query using JPL (SWI-Prolog engine for Java).
+     * Gets relation by running the Prolog query using JPL (SWI-Prolog engine for Java).
      *
      * @param contextPath Path to WEB-INF
      * @param query The query array
-     * @return relation(s)
+     * @return A string array of relation(s). There can be more than one relation.
+     *         Ex. grandparent's son = father and uncle.
      * @throws MalformedURLException Throws if couldn't find servlet context pa
      */
-    public static String getRelation(String contextPath, String[] query) throws MalformedURLException {
+    public static String[] getRelation(String contextPath, String[] query) throws MalformedURLException {
         String knowledgeBase = "familyrelationships.pl";
         Query consult = new Query("consult", new Term[] {new Atom(contextPath + '/' + knowledgeBase)});
         if (!consult.hasSolution())
@@ -34,17 +35,23 @@ public class RelationsHandler {
         for (int i = 0; i < query.length; i++) {
             builder.append(
                     "query_family(" + alphabet + ", " +
-                            (i == 0 ? "User, " : (char)(alphabet - 1) + ", ")
+                            (i == 0 ? "raghav, " : (char)(alphabet - 1) + ", ")
                             + query[i] + "), "
-                            + (i != query.length - 1 ? "" : "query_family(" + alphabet + ", User, Result).")
+                            + (i != query.length - 1 ? "" : "query_family(" + alphabet + ", raghav, Result).")
             );
             alphabet++;
         }
         String prolog_query = builder.toString();
-        Map<String, Term> result = Query.oneSolution(prolog_query);
-        if (result == null || result.isEmpty())
+        Map<String, Term>[] results = Query.allSolutions(prolog_query);
+        if (results == null)
             return null;
-        return result.get("Result").toString();
+
+        String[] relation = new String[results.length];
+        for (int i = 0; i < results.length; i++) {
+            relation[i] = results[i].get("Result").name();
+        }
+
+        return relation;
     }
 
 }

@@ -32,7 +32,11 @@ To change this template use File | Settings | File Templates.
                 </div>
             </form>
             <c:if test="${requestScope.results != null}">
-                ${requestScope.results}
+                <ol>
+                    <c:forEach var="result" items="${requestScope.results}">
+                        <li>${result}</li>
+                    </c:forEach>
+                </ol>
             </c:if>
         </div>
     </div>
