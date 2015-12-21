@@ -1,6 +1,7 @@
 package in.relationfinder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,9 +24,19 @@ public class FindRelationServlet extends HttpServlet {
         String[] query = query_without_punctuation.split(" ");
 
         String contextPath = getServletContext().getResource("/WEB-INF").getPath();
-        String[] relation = RelationsHandler.getRelation(contextPath, query);
+        String[] relations = RelationsHandler.getRelation(contextPath, query);
 
-        request.setAttribute("results", relation);
+        ArrayList<String[]> results = null;
+
+        if (relations != null) {
+            results = new ArrayList<>(relations.length);
+            for (String relation : relations) {
+                String[] allNames = RelationsHandler.getOtherNames(relation);
+                results.add(allNames);
+            }
+        }
+
+        request.setAttribute("results", results);
         request.setAttribute("query", raw_query);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/static/index.jsp");
         requestDispatcher.forward(request, response);

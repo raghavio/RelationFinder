@@ -54,4 +54,21 @@ public class RelationsHandler {
         return relation;
     }
 
+    /**
+     * Returns other names of a relation. TODO Finish this
+     *
+     * @param relation Relation
+     * @return Array of other names if any.
+     */
+    public static String[] getOtherNames(String relation) {
+        switch (relation) {
+            case "father":
+                return new String[] {relation, "papa", "baba"};
+            case "mother":
+                return new String[] {relation, "maa"};
+            default:
+                return new String[] {relation};
+        }
+    }
+
 }

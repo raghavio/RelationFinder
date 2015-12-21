@@ -34,7 +34,11 @@ To change this template use File | Settings | File Templates.
             <c:if test="${requestScope.results != null}">
                 <ol>
                     <c:forEach var="result" items="${requestScope.results}">
-                        <li>${result}</li>
+                        <li>
+                            <c:forEach var="relation" items="${result}">
+                                ${relation}
+                            </c:forEach>
+                        </li>
                     </c:forEach>
                 </ol>
             </c:if>
