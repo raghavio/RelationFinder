@@ -26,13 +26,13 @@ public class FindRelationServlet extends HttpServlet {
         String contextPath = getServletContext().getResource("/WEB-INF").getPath();
         String[] relations = RelationsHandler.getRelation(contextPath, query);
 
-        ArrayList<String[]> results = null;
+        Object[] results = null;
 
         if (relations != null) {
-            results = new ArrayList<>(relations.length);
-            for (String relation : relations) {
-                String[] allNames = RelationsHandler.getOtherNames(relation);
-                results.add(allNames);
+            results = new Object[relations.length];
+            for (int i = 0; i < relations.length; i++) {
+                Object[] allNames = RelationsHandler.getOtherNames(relations[i]);
+                results[i] = allNames;
             }
         }
 

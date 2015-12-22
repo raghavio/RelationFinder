@@ -3,8 +3,16 @@ package in.relationfinder;
 import org.jpl7.Atom;
 import org.jpl7.Query;
 import org.jpl7.Term;
+import org.yaml.snakeyaml.Yaml;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,26 +27,28 @@ public class RelationsHandler {
      * Gets relation by running the Prolog query using JPL (SWI-Prolog engine for Java).
      *
      * @param contextPath Path to WEB-INF
-     * @param query The query array
+     * @param query       The query array
      * @return A string array of relation(s). There can be more than one relation.
-     *         Ex. grandparent's son = father and uncle.
+     * Ex. grandparent's son = father and uncle.
      * @throws MalformedURLException Throws if couldn't find servlet context pa
      */
     public static String[] getRelation(String contextPath, String[] query) throws MalformedURLException {
         String knowledgeBase = "familyrelationships.pl";
-        Query consult = new Query("consult", new Term[] {new Atom(contextPath + '/' + knowledgeBase)});
+        Query consult = new Query("consult", new Term[]{new Atom(contextPath + '/' + knowledgeBase)});
         if (!consult.hasSolution())
             return null;
 
         StringBuilder builder = new StringBuilder();
         char alphabet = 'A';
         for (int i = 0; i < query.length; i++) {
-            builder.append(
-                    "query_family(" + alphabet + ", " +
-                            (i == 0 ? "raghav, " : (char)(alphabet - 1) + ", ")
-                            + query[i] + "), "
-                            + (i != query.length - 1 ? "" : "query_family(" + alphabet + ", raghav, Result).")
-            );
+            builder.append("query_family(").append(alphabet).append(", ");
+            if (i == 0)
+                builder.append("raghav, ");
+            else
+                builder.append((char) (alphabet - 1)).append(", ");
+            builder.append(query[i]).append("), ");
+            if (i == query.length - 1)
+                builder.append("query_family(").append(alphabet).append(", raghav, Result).");
             alphabet++;
         }
         String prolog_query = builder.toString();
@@ -55,20 +65,17 @@ public class RelationsHandler {
     }
 
     /**
-     * Returns other names of a relation. TODO Finish this
+     * Returns other names of a relation.
      *
      * @param relation Relation
-     * @return Array of other names if any.
      */
-    public static String[] getOtherNames(String relation) {
-        switch (relation) {
-            case "father":
-                return new String[] {relation, "papa", "baba"};
-            case "mother":
-                return new String[] {relation, "maa"};
-            default:
-                return new String[] {relation};
-        }
+    public static Object[] getOtherNames(String relation) {
+        if (YamlHandler.RELATION_NAMES.containsKey(relation)) {
+            ArrayList<String> otherNames = new ArrayList<>(YamlHandler.RELATION_NAMES.get(relation));
+            otherNames.add(0, relation);
+            return otherNames.toArray();
+        } else
+            return new String[] {relation};
     }
 
 }
