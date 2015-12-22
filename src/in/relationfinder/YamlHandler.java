@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Loads relationship data from Yaml file.
@@ -25,6 +26,10 @@ public class YamlHandler implements ServletContextListener {
         InputStream input = RelationsHandler.class.getClassLoader().getResourceAsStream("/relationship_names.yaml");
         Yaml yaml = new Yaml();
         RELATION_NAMES = (HashMap<String, ArrayList<String>>) yaml.load(input);
+        List<String> allRelations = new ArrayList<>();
+        RELATION_NAMES.values().forEach(allRelations::addAll); //Adds all other names of relation to allRelations
+        RELATION_NAMES.keySet().forEach(allRelations::add); //Adds all relation names (as defined in prolog) to allRelations
+        servletContextEvent.getServletContext().setAttribute("all_relations", allRelations);
         try {
             input.close();
         } catch (IOException e) {
