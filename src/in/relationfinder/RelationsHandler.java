@@ -31,26 +31,13 @@ public class RelationsHandler {
         if (!consult.hasSolution())
             return null;
 
-        StringBuilder builder = new StringBuilder();
         String query = processQuery(raw_query);
         String[] relations = query.split(" ");
-        char alphabet = 'A';
-        for (int i = 0; i < relations.length; i++) {
-            builder.append("query_family(").append(alphabet).append(", ");
-            if (i == 0)
-                builder.append("raghav, ");
-            else
-                builder.append((char) (alphabet - 1)).append(", ");
-            builder.append(relations[i]).append("), ");
-            if (i == relations.length - 1)
-                builder.append("query_family(").append(alphabet).append(", raghav, Result).");
-            alphabet++;
-        }
-        String prolog_query = builder.toString();
+
+        String prolog_query = generatePrologQuery(relations);
         Map<String, Term>[] results = Query.allSolutions(prolog_query);
         if (results == null)
             return null;
-
         String[] relation = new String[results.length];
         for (int i = 0; i < results.length; i++) {
             relation[i] = results[i].get("Result").name();
@@ -68,6 +55,31 @@ public class RelationsHandler {
         String query;
         query = raw_query.replaceAll("'s", ""); //Replace all apostrophe s
         return query;
+    }
+
+    /**
+     * TODO Document this in detail
+     * Generates a Prolog query string to query family relations on SWI-Prolog.
+     * @param relations A String array of relations on the basis of which we return the query.
+     *                  Ex. ['father', 'mother'] means relation to my father's mother.
+     * @return Prolog query string
+     */
+    private static String generatePrologQuery(String[] relations) {
+        StringBuilder builder = new StringBuilder();
+
+        char alphabet = 'A';
+        for (int i = 0; i < relations.length; i++) {
+            builder.append("query_family(").append(alphabet).append(", ");
+            if (i == 0)
+                builder.append("raghav, ");
+            else
+                builder.append((char) (alphabet - 1)).append(", ");
+            builder.append(relations[i]).append("), ");
+            if (i == relations.length - 1)
+                builder.append("query_family(").append(alphabet).append(", raghav, Result).");
+            alphabet++;
+        }
+        return builder.toString();
     }
 
     /**
