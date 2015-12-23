@@ -19,12 +19,9 @@ public class FindRelationServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String raw_query = request.getParameter("query"); //Ex: father's mother's daughter
-        String query_without_punctuation = raw_query.replaceAll("'s", "");
-
-        String[] query = query_without_punctuation.split(" ");
 
         String contextPath = getServletContext().getResource("/WEB-INF").getPath();
-        String[] relations = RelationsHandler.getRelation(contextPath, query);
+        String[] relations = RelationsHandler.getRelation(contextPath, raw_query);
 
         Object[] results = null;
 

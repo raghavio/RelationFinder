@@ -3,16 +3,9 @@ package in.relationfinder;
 import org.jpl7.Atom;
 import org.jpl7.Query;
 import org.jpl7.Term;
-import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -27,27 +20,29 @@ public class RelationsHandler {
      * Gets relation by running the Prolog query using JPL (SWI-Prolog engine for Java).
      *
      * @param contextPath Path to WEB-INF
-     * @param query       The query array
+     * @param raw_query   The query input by user as it is. Ex. father's mother's sister
      * @return A string array of relation(s). There can be more than one relation.
      * Ex. grandparent's son = father and uncle.
      * @throws MalformedURLException Throws if couldn't find servlet context pa
      */
-    public static String[] getRelation(String contextPath, String[] query) throws MalformedURLException {
+    public static String[] getRelation(String contextPath, String raw_query) throws MalformedURLException {
         String knowledgeBase = "familyrelationships.pl";
         Query consult = new Query("consult", new Term[]{new Atom(contextPath + '/' + knowledgeBase)});
         if (!consult.hasSolution())
             return null;
 
         StringBuilder builder = new StringBuilder();
+        String query = processQuery(raw_query);
+        String[] relations = query.split(" ");
         char alphabet = 'A';
-        for (int i = 0; i < query.length; i++) {
+        for (int i = 0; i < relations.length; i++) {
             builder.append("query_family(").append(alphabet).append(", ");
             if (i == 0)
                 builder.append("raghav, ");
             else
                 builder.append((char) (alphabet - 1)).append(", ");
-            builder.append(query[i]).append("), ");
-            if (i == query.length - 1)
+            builder.append(relations[i]).append("), ");
+            if (i == relations.length - 1)
                 builder.append("query_family(").append(alphabet).append(", raghav, Result).");
             alphabet++;
         }
@@ -62,6 +57,17 @@ public class RelationsHandler {
         }
 
         return relation;
+    }
+
+    /**
+     * Processes user query. Removes redundant characters.
+     * @param raw_query The query input by user as it is.
+     * @return processed query.
+     */
+    private static String processQuery(String raw_query) {
+        String query;
+        query = raw_query.replaceAll("'s", ""); //Replace all apostrophe s
+        return query;
     }
 
     /**
