@@ -21,6 +21,8 @@ public class YamlHandler implements ServletContextListener {
 
     public static HashMap<String, ArrayList<String>> RELATION_NAMES;
 
+    public static List<String> OTHER_RELATION_NAMES;
+
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         InputStream input = RelationsHandler.class.getClassLoader().getResourceAsStream("/relationship_names.yaml");
@@ -28,6 +30,7 @@ public class YamlHandler implements ServletContextListener {
         RELATION_NAMES = (HashMap<String, ArrayList<String>>) yaml.load(input);
         List<String> allRelations = new ArrayList<>();
         RELATION_NAMES.values().forEach(allRelations::addAll); //Adds all other names of relation to allRelations
+        OTHER_RELATION_NAMES = new ArrayList<>(allRelations);
         RELATION_NAMES.keySet().forEach(allRelations::add); //Adds all relation names (as defined in prolog) to allRelations
         servletContextEvent.getServletContext().setAttribute("all_relations", allRelations);
         try {

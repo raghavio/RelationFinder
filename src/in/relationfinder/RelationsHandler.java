@@ -5,8 +5,9 @@ import org.jpl7.Query;
 import org.jpl7.Term;
 
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * Handles all the stuff related to Relationships. Couldn't think of another name :/.
@@ -31,8 +32,7 @@ public class RelationsHandler {
         if (!consult.hasSolution())
             return null;
 
-        String query = processQuery(raw_query);
-        String[] relations = query.split(" ");
+        String[] relations = processQuery(raw_query);
 
         String prolog_query = generatePrologQuery(relations);
         Map<String, Term>[] results = Query.allSolutions(prolog_query);
@@ -47,14 +47,25 @@ public class RelationsHandler {
     }
 
     /**
-     * Processes user query. Removes redundant characters.
+     * Processes user query.
+     * Removes redundant characters and changes other relation names to actual name used in Prolog facts.
+     * For ex, if there's daddy in query it gets changed to father, because that's what we used in our Prolog knowledge base.
+     *
      * @param raw_query The query input by user as it is.
-     * @return processed query.
+     * @return String array of relations. Basically query.split(" ").
      */
-    private static String processQuery(String raw_query) {
+    private static String[] processQuery(String raw_query) {
         String query;
         query = raw_query.replaceAll("'s", ""); //Replace all apostrophe s
-        return query;
+        String[] relations = query.split(" ");
+
+        for(int i = 0; i < relations.length; i++) //Whoa
+            if (YamlHandler.OTHER_RELATION_NAMES.contains(relations[i]))
+                for (Entry<String, ArrayList<String>> entry : YamlHandler.RELATION_NAMES.entrySet())
+                    for (String otherName : entry.getValue())
+                        if (Objects.equals(relations[i], otherName))
+                            relations[i] = entry.getKey();
+        return relations;
     }
 
     /**
