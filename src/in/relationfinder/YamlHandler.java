@@ -29,7 +29,7 @@ public class YamlHandler implements ServletContextListener {
         Yaml yaml = new Yaml();
         RELATION_NAMES = (HashMap<String, ArrayList<String>>) yaml.load(input);
         List<String> allRelations = new ArrayList<>();
-        RELATION_NAMES.values().forEach(allRelations::addAll); //Adds all other names of relation to allRelations
+        RELATION_NAMES.values().stream().filter(names -> names != null).forEach(allRelations::addAll);
         OTHER_RELATION_NAMES = new ArrayList<>(allRelations);
         RELATION_NAMES.keySet().forEach(allRelations::add); //Adds all relation names (as defined in prolog) to allRelations
         servletContextEvent.getServletContext().setAttribute("all_relations", allRelations);
