@@ -7,7 +7,6 @@ import org.jpl7.Term;
 import java.net.MalformedURLException;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 /**
  * Handles all the stuff related to Relationships. Couldn't think of another name :/.
@@ -61,7 +60,7 @@ public class RelationsHandler {
 
         for(int i = 0; i < relations.length; i++) //Whoa
             if (YamlHandler.OTHER_RELATION_NAMES.contains(relations[i]))
-                for (Entry<String, ArrayList<String>> entry : YamlHandler.RELATION_NAMES.entrySet())
+                for (Entry<String, ArrayList<String>> entry : YamlHandler.RELATION_NAMES_MAP.entrySet())
                     for (String otherName : entry.getValue())
                         if (Objects.equals(relations[i], otherName))
                             relations[i] = entry.getKey();
@@ -99,8 +98,8 @@ public class RelationsHandler {
      * @param relation Relation
      */
     public static Object[] getOtherNames(String relation) {
-        if (YamlHandler.RELATION_NAMES.containsKey(relation)) {
-            ArrayList<String> otherNames = new ArrayList<>(YamlHandler.RELATION_NAMES.get(relation));
+        if (YamlHandler.RELATION_NAMES_MAP.containsKey(relation)) {
+            ArrayList<String> otherNames = new ArrayList<>(YamlHandler.RELATION_NAMES_MAP.get(relation));
             otherNames.add(0, relation);
             return otherNames.toArray();
         } else

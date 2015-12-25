@@ -19,19 +19,25 @@ import java.util.List;
 @WebListener
 public class YamlHandler implements ServletContextListener {
 
-    public static HashMap<String, ArrayList<String>> RELATION_NAMES;
+    /**
+     * Key values pair of relation and its other names.
+     */
+    public static HashMap<String, ArrayList<String>> RELATION_NAMES_MAP;
 
+    /**
+     * All other names of every relation defined in YAML file.
+     */
     public static List<String> OTHER_RELATION_NAMES;
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         InputStream input = RelationsHandler.class.getClassLoader().getResourceAsStream("/relationship_names.yaml");
         Yaml yaml = new Yaml();
-        RELATION_NAMES = (HashMap<String, ArrayList<String>>) yaml.load(input);
+        RELATION_NAMES_MAP = (HashMap<String, ArrayList<String>>) yaml.load(input);
         List<String> allRelations = new ArrayList<>();
-        RELATION_NAMES.values().stream().filter(names -> names != null).forEach(allRelations::addAll);
+        RELATION_NAMES_MAP.values().stream().filter(names -> names != null).forEach(allRelations::addAll);
         OTHER_RELATION_NAMES = new ArrayList<>(allRelations);
-        RELATION_NAMES.keySet().forEach(allRelations::add); //Adds all relation names (as defined in prolog) to allRelations
+        RELATION_NAMES_MAP.keySet().forEach(allRelations::add); //Adds all relation names (as defined in prolog) to allRelations
         servletContextEvent.getServletContext().setAttribute("all_relations", allRelations);
         try {
             input.close();
