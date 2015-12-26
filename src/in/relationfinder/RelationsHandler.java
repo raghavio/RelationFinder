@@ -73,9 +73,10 @@ public class RelationsHandler {
         for(int i = 0; i < relations.length; i++) //Whoa
             if (YamlHandler.OTHER_RELATION_NAMES.contains(relations[i]))
                 for (Entry<String, ArrayList<String>> entry : YamlHandler.RELATION_NAMES_MAP.entrySet())
-                    for (String otherName : entry.getValue())
-                        if (Objects.equals(relations[i], otherName))
-                            relations[i] = entry.getKey();
+                    if (entry != null) //For relations with no other names defined
+                        for (String otherName : entry.getValue())
+                            if (Objects.equals(relations[i], otherName))
+                                relations[i] = entry.getKey();
         return relations;
     }
 
@@ -110,10 +111,11 @@ public class RelationsHandler {
      * @param relation Relation
      */
     public static Object[] getOtherNames(String relation) {
-        if (YamlHandler.RELATION_NAMES_MAP.containsKey(relation)) {
-            ArrayList<String> otherNames = new ArrayList<>(YamlHandler.RELATION_NAMES_MAP.get(relation));
-            otherNames.add(0, relation);
-            return otherNames.toArray();
+        List<String> otherNames = YamlHandler.RELATION_NAMES_MAP.get(relation);
+        if (otherNames != null) {
+            ArrayList<String> relationNames = new ArrayList<>(otherNames);
+            relationNames.add(0, relation);
+            return relationNames.toArray();
         } else
             return new String[] {relation};
     }
