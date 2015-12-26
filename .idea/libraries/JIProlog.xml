@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="jpl">
+  <library name="JIProlog">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jpl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jiprolog-4.1.2.8.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

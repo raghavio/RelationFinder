@@ -1,8 +1,9 @@
 package in.relationfinder;
 
-import org.jpl7.Atom;
-import org.jpl7.Query;
-import org.jpl7.Term;
+import com.ugos.jiprolog.engine.JIPEngine;
+import com.ugos.jiprolog.engine.JIPQuery;
+import com.ugos.jiprolog.engine.JIPSyntaxErrorException;
+import com.ugos.jiprolog.engine.JIPTerm;
 
 import java.net.MalformedURLException;
 import java.util.*;
@@ -10,39 +11,50 @@ import java.util.Map.Entry;
 
 /**
  * Handles all the stuff related to Relationships. Couldn't think of another name :/.
- * Using JPL to query Prolog.
+ * Using JIProlog to query Prolog.
  *
  * @author Raghav
  */
 public class RelationsHandler {
 
     /**
-     * Gets relation by running the Prolog query using JPL (SWI-Prolog engine for Java).
+     * Gets relation by running the Prolog query using JIProlog.
      *
      * @param contextPath Path to WEB-INF
      * @param raw_query   The query input by user as it is. Ex. father's mother's sister
-     * @return A string array of relation(s). There can be more than one relation.
+     * @return A list of relation(s). There can be more than one relation sometimes.
      * Ex. grandparent's son = father and uncle.
      * @throws MalformedURLException Throws if couldn't find servlet context pa
      */
-    public static String[] getRelation(String contextPath, String raw_query) throws MalformedURLException {
+    public static List<String> getRelation(String contextPath, String raw_query) throws MalformedURLException {
         String knowledgeBase = "familyrelationships.pl";
-        Query consult = new Query("consult", new Term[]{new Atom(contextPath + '/' + knowledgeBase)});
-        if (!consult.hasSolution())
-            return null;
-
         String[] relations = processQuery(raw_query);
-
         String prolog_query = generatePrologQuery(relations);
-        Map<String, Term>[] results = Query.allSolutions(prolog_query);
-        if (results == null)
+        List<String> results = null;
+
+        JIPEngine jipEngine = new JIPEngine();
+        jipEngine.setSearchPath(contextPath);
+        try {
+            jipEngine.consultFile(knowledgeBase);
+            JIPQuery jipQuery = jipEngine.openSynchronousQuery(prolog_query);
+            if (jipQuery.hasMoreChoicePoints())
+                results = new ArrayList<>();
+            while (jipQuery.hasMoreChoicePoints()) {
+                JIPTerm jipTerm = jipQuery.nextSolution();
+                if (jipTerm == null)
+                    break;
+                Hashtable hashtable = jipTerm.getVariablesTable();
+                if (!hashtable.containsKey("Result"))
+                    break;
+                String result = hashtable.get("Result").toString();
+                results.add(result);
+            }
+        } catch (JIPSyntaxErrorException e) {
+            //TODO Logging
             return null;
-        String[] relation = new String[results.length];
-        for (int i = 0; i < results.length; i++) {
-            relation[i] = results[i].get("Result").name();
         }
 
-        return relation;
+        return results;
     }
 
     /**
@@ -69,7 +81,7 @@ public class RelationsHandler {
 
     /**
      * TODO Document this in detail
-     * Generates a Prolog query string to query family relations on SWI-Prolog.
+     * Generates a Prolog query string to query family relations in Prolog using JIProlog.
      * @param relations A String array of relations on the basis of which we return the query.
      *                  Ex. ['father', 'mother'] means relation to my father's mother.
      * @return Prolog query string
