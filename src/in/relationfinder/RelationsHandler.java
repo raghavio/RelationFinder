@@ -73,7 +73,7 @@ public class RelationsHandler {
         for(int i = 0; i < relations.length; i++) //Whoa
             if (YamlHandler.OTHER_RELATION_NAMES.contains(relations[i]))
                 for (Entry<String, ArrayList<String>> entry : YamlHandler.RELATION_NAMES_MAP.entrySet())
-                    if (entry != null) //For relations with no other names defined
+                    if (entry.getValue() != null) //For relations with no other names defined
                         for (String otherName : entry.getValue())
                             if (Objects.equals(relations[i], otherName))
                                 relations[i] = entry.getKey();
