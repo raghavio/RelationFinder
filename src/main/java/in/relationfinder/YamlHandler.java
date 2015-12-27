@@ -31,7 +31,7 @@ public class YamlHandler implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        InputStream input = RelationsHandler.class.getClassLoader().getResourceAsStream("/relationship_names.yaml");
+        InputStream input = getClass().getClassLoader().getResourceAsStream("/relationship_names.yaml");
         Yaml yaml = new Yaml();
         RELATION_NAMES_MAP = (HashMap<String, ArrayList<String>>) yaml.load(input);
         List<String> allRelations = new ArrayList<>();

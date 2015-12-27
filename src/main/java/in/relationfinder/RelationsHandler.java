@@ -20,20 +20,20 @@ public class RelationsHandler {
     /**
      * Gets relation by running the Prolog query using JIProlog.
      *
-     * @param contextPath Path to WEB-INF
+     * @param resourcesPath Path to resources folder
      * @param raw_query   The query input by user as it is. Ex. father's mother's sister
      * @return A list of relation(s). There can be more than one relation sometimes.
      * Ex. grandparent's son = father and uncle.
      * @throws MalformedURLException Throws if couldn't find servlet context pa
      */
-    public static List<String> getRelation(String contextPath, String raw_query) throws MalformedURLException {
+    public static List<String> getRelation(String resourcesPath, String raw_query) throws MalformedURLException {
         String knowledgeBase = "familyrelationships.pl";
         String[] relations = processQuery(raw_query);
         String prolog_query = generatePrologQuery(relations);
         List<String> results = null;
 
         JIPEngine jipEngine = new JIPEngine();
-        jipEngine.setSearchPath(contextPath);
+        jipEngine.setSearchPath(resourcesPath);
         try {
             jipEngine.consultFile(knowledgeBase);
             JIPQuery jipQuery = jipEngine.openSynchronousQuery(prolog_query);
