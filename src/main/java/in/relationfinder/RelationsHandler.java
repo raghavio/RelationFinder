@@ -5,6 +5,7 @@ import com.ugos.jiprolog.engine.JIPQuery;
 import com.ugos.jiprolog.engine.JIPSyntaxErrorException;
 import com.ugos.jiprolog.engine.JIPTerm;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.*;
 import java.util.Map.Entry;
@@ -33,8 +34,8 @@ public class RelationsHandler {
         List<String> results = null;
 
         JIPEngine jipEngine = new JIPEngine();
-        jipEngine.setSearchPath(resourcesPath);
         try {
+            jipEngine.setSearchPath(resourcesPath);
             jipEngine.consultFile(knowledgeBase);
             JIPQuery jipQuery = jipEngine.openSynchronousQuery(prolog_query);
             if (jipQuery.hasMoreChoicePoints())
@@ -52,6 +53,8 @@ public class RelationsHandler {
         } catch (JIPSyntaxErrorException e) {
             //TODO Logging
             return null;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return results;
