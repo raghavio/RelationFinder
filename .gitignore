@@ -4,7 +4,7 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+# *.jar Remove this for local maven repo
 *.war
 *.ear
 
