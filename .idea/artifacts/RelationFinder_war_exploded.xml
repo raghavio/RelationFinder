@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="RelationFinder:war exploded">
-    <output-path>$PROJECT_DIR$/target/artifacts/RelationFinder_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/RelationFinder-1.0-SNAPSHOT</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -8,12 +8,12 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.yaml:snakeyaml:1.16" />
-          <element id="library" level="project" name="Maven: com.ugos.jiprolog:JIProlog:4.1.2.8" />
-          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.0-b01" />
-          <element id="library" level="project" name="Maven: javax.servlet:jsp-api:2.0" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
-          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.4" />
+          <element id="library" level="project" name="Maven: com.ugos.jiprolog:JIProlog:4.1.2.8" />
         </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/RelationFinder-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="RelationFinder/web/Web" />
     </root>
