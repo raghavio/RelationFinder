@@ -20,8 +20,7 @@ public class FindRelationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String raw_query = request.getParameter("query"); //Ex: father's mother's daughter
 
-        String resourcesPath = getClass().getResource("/").getPath();
-        List<String> relations = RelationsHandler.getRelation(resourcesPath, raw_query);
+        List<String> relations = RelationsHandler.getRelation(raw_query);
 
         Object[] results = null;
 

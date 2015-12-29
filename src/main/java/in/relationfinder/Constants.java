@@ -29,8 +29,13 @@ public class Constants {
      */
     public static final List<String> RELATION_NAMES;
 
+    /**
+     * Path to resources folder
+     */
+    public static final String RESOURCES_PATH = Constants.class.getResource("/").getPath();
+
     static {
-        InputStream input = ContextListener.class.getClassLoader().getResourceAsStream("/relationship_names.yaml");
+        InputStream input = Constants.class.getClassLoader().getResourceAsStream("/relationship_names.yaml");
         Yaml yaml = new Yaml();
         RELATION_NAMES_MAP = (HashMap<String, ArrayList<String>>) yaml.load(input);
 

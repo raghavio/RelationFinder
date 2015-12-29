@@ -23,12 +23,11 @@ public class RelationsHandler {
     /**
      * Gets relation by running the Prolog query using JIProlog.
      *
-     * @param resourcesPath Path to resources folder
      * @param raw_query   The query input by user as it is. Ex. father's mother's sister
      * @return A list of relation(s). There can be more than one relation sometimes.
      * Ex. grandparent's son = father and uncle.
      */
-    public static List<String> getRelation(String resourcesPath, String raw_query) {
+    public static List<String> getRelation(String raw_query) {
         String knowledgeBase = "familyrelationships.pl";
         String[] relations = processQuery(raw_query);
         String prolog_query = generatePrologQuery(relations);
@@ -36,7 +35,7 @@ public class RelationsHandler {
 
         JIPEngine jipEngine = new JIPEngine();
         try {
-            jipEngine.setSearchPath(resourcesPath);
+            jipEngine.setSearchPath(Constants.RESOURCES_PATH);
             jipEngine.consultFile(knowledgeBase);
             JIPQuery jipQuery = jipEngine.openSynchronousQuery(prolog_query);
             if (jipQuery.hasMoreChoicePoints())
