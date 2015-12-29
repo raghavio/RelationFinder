@@ -2,21 +2,15 @@ package in.relationfinder;
 
 import org.yaml.snakeyaml.Yaml;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Loads relationship data from Yaml file.
- *
  * @author Raghav
  */
-@WebListener
-public class YamlHandler implements ServletContextListener {
+public class Constants {
 
     /**
      * Key values pair of relation and its other names.
@@ -36,7 +30,7 @@ public class YamlHandler implements ServletContextListener {
     public static final List<String> RELATION_NAMES;
 
     static {
-        InputStream input = YamlHandler.class.getClassLoader().getResourceAsStream("/relationship_names.yaml");
+        InputStream input = ContextListener.class.getClassLoader().getResourceAsStream("/relationship_names.yaml");
         Yaml yaml = new Yaml();
         RELATION_NAMES_MAP = (HashMap<String, ArrayList<String>>) yaml.load(input);
 
@@ -55,18 +49,4 @@ public class YamlHandler implements ServletContextListener {
         RELATION_NAMES.addAll(relationNamesKey.stream().collect(Collectors.toList()));
     }
 
-    @Override
-    public void contextInitialized(ServletContextEvent servletContextEvent) {
-        // We add keys (original relation names) and values (different names of relation) to one list.
-        // This list is for jquery autocomplete.
-        List<String> allRelations = new ArrayList<>();
-        allRelations.addAll(OTHER_RELATION_NAMES);
-        allRelations.addAll(RELATION_NAMES);
-        servletContextEvent.getServletContext().setAttribute("all_relations", allRelations);
-    }
-
-    @Override
-    public void contextDestroyed(ServletContextEvent servletContextEvent) {
-
-    }
 }
