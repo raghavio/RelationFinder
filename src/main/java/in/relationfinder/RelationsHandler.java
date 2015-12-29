@@ -23,7 +23,7 @@ public class RelationsHandler {
     /**
      * Gets relation by running the Prolog query using JIProlog.
      *
-     * @param raw_query   The query input by user as it is. Ex. father's mother's sister
+     * @param raw_query The query input by user as it is. Ex. father's mother's sister
      * @return A list of relation(s). There can be more than one relation sometimes.
      * Ex. grandparent's son = father and uncle.
      */
@@ -52,9 +52,6 @@ public class RelationsHandler {
             }
         } catch (JIPSyntaxErrorException e) {
             //TODO Logging
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
         return results;
@@ -73,7 +70,7 @@ public class RelationsHandler {
         query = raw_query.replaceAll("'s", ""); //Replace all apostrophe s
         String[] relations = query.split(" ");
 
-        for(int i = 0; i < relations.length; i++) //Whoa
+        for (int i = 0; i < relations.length; i++) //Whoa
             if (Constants.OTHER_RELATION_NAMES.contains(relations[i]))
                 for (Entry<String, ArrayList<String>> entry : Constants.RELATION_NAMES_MAP.entrySet())
                     if (entry.getValue() != null) //For relations with no other names defined
@@ -86,6 +83,7 @@ public class RelationsHandler {
     /**
      * TODO Document this in detail
      * Generates a Prolog query string to query family relations in Prolog using JIProlog.
+     *
      * @param relations A String array of relations on the basis of which we return the query.
      *                  Ex. ['father', 'mother'] means relation to my father's mother.
      * @return Prolog query string
@@ -120,7 +118,7 @@ public class RelationsHandler {
             relationNames.add(0, relation);
             return relationNames.toArray();
         } else
-            return new String[] {relation};
+            return new String[]{relation};
     }
 
 }

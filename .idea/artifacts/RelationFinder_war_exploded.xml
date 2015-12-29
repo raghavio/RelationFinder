@@ -9,7 +9,7 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.yaml:snakeyaml:1.16" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/com/ugos/jiprolog/JIProlog/4.1.2.8/JIProlog-4.1.2.8.jar" output-file-name="jiprolog-4.1.2.8.jar" />
+          <element id="library" level="project" name="Maven: com.ugos.jiprolog:jiprolog:4.1.4.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">
