@@ -6,9 +6,11 @@ import com.ugos.jiprolog.engine.JIPSyntaxErrorException;
 import com.ugos.jiprolog.engine.JIPTerm;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 /**
  * Handles all the stuff related to Relationships. Couldn't think of another name :/.
@@ -25,9 +27,8 @@ public class RelationsHandler {
      * @param raw_query   The query input by user as it is. Ex. father's mother's sister
      * @return A list of relation(s). There can be more than one relation sometimes.
      * Ex. grandparent's son = father and uncle.
-     * @throws MalformedURLException Throws if couldn't find servlet context pa
      */
-    public static List<String> getRelation(String resourcesPath, String raw_query) throws MalformedURLException {
+    public static List<String> getRelation(String resourcesPath, String raw_query) {
         String knowledgeBase = "familyrelationships.pl";
         String[] relations = processQuery(raw_query);
         String prolog_query = generatePrologQuery(relations);
