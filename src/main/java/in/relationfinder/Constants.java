@@ -35,7 +35,7 @@ public class Constants {
     public static final String RESOURCES_PATH = Constants.class.getResource("/").getPath();
 
     static {
-        InputStream input = Constants.class.getClassLoader().getResourceAsStream("/relationship_names.yaml");
+        InputStream input = Constants.class.getClassLoader().getResourceAsStream("/relationship_names.yml");
         Yaml yaml = new Yaml();
         RELATION_NAMES_MAP = (HashMap<String, ArrayList<String>>) yaml.load(input);
 
