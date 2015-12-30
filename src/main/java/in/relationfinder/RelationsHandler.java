@@ -111,14 +111,15 @@ public class RelationsHandler {
      *
      * @param relation Relation
      */
-    public static Object[] getOtherNames(String relation) {
+    public static String[] getOtherNames(String relation) {
         List<String> otherNames = Constants.RELATION_NAMES_MAP.get(relation);
         if (otherNames != null) {
             ArrayList<String> relationNames = new ArrayList<>(otherNames);
             relationNames.add(0, relation);
-            return relationNames.toArray();
+            String[] result = new String[relationNames.size()];
+            relationNames.toArray(result);
+            return result;
         } else
             return new String[]{relation};
     }
-
 }

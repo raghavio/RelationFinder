@@ -1,6 +1,7 @@
 package in.relationfinder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,13 +23,13 @@ public class FindRelationServlet extends HttpServlet {
 
         List<String> relations = RelationsHandler.getRelation(raw_query);
 
-        Object[] results = null;
+        List<String[]> results = null;
 
         if (relations != null) {
-            results = new Object[relations.size()];
-            for (int i = 0; i < results.length; i++) {
-                Object[] allNames = RelationsHandler.getOtherNames(relations.get(i));
-                results[i] = allNames;
+            results = new ArrayList<>(relations.size());
+            for (int i = 0; i < relations.size(); i++) {
+                String[] allNames = RelationsHandler.getOtherNames(relations.get(i));
+                results.add(allNames);
             }
         }
 
