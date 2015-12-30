@@ -5,7 +5,6 @@ import com.ugos.jiprolog.engine.JIPQuery;
 import com.ugos.jiprolog.engine.JIPSyntaxErrorException;
 import com.ugos.jiprolog.engine.JIPTerm;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -121,5 +120,24 @@ public class RelationsHandler {
             return result;
         } else
             return new String[]{relation};
+    }
+
+    /**
+     * Processes raw relationship names.
+     * Replaces underscore with space or - if it contains '_law'.
+     * So, paternal_grandfather becomes paternal grandfather and brother_in_law becomes brother-in-law.
+     *
+     * @param results List of relations.
+     * @return Processed relations.
+     */
+    public static List<String[]> processRelations(List<String[]> results) {
+        for (String[] result : results) {
+            for (int i = 0; i < result.length; i++) {
+                String relation = result[i];
+                String replaceBy = relation.contains("_law") ? "-" : " ";
+                result[i] = relation.replaceAll("_", replaceBy);
+            }
+        }
+        return results;
     }
 }

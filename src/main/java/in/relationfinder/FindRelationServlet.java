@@ -27,11 +27,13 @@ public class FindRelationServlet extends HttpServlet {
 
         if (relations != null) {
             results = new ArrayList<>(relations.size());
-            for (int i = 0; i < relations.size(); i++) {
-                String[] allNames = RelationsHandler.getOtherNames(relations.get(i));
+            for (String relation : relations) {
+                String[] allNames = RelationsHandler.getOtherNames(relation);
                 results.add(allNames);
             }
         }
+
+        results = RelationsHandler.processRelations(results);
 
         request.setAttribute("results", results);
         request.setAttribute("query", raw_query);
