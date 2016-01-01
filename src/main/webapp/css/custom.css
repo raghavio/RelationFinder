@@ -14,3 +14,16 @@ body {
     width: 100%;
     max-width: 100%
 }
+
+.title-text {
+    font-size: 30px;
+    color: white;
+}
+
+.query_input_box {
+    background: none;
+    font-weight: bold;
+    text-decoration: underline;
+    border: 0;
+    outline: 0;
+}

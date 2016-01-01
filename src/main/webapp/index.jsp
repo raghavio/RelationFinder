@@ -20,27 +20,25 @@ To change this template use File | Settings | File Templates.
 </head>
 <body>
 <div class="container">
-    <header style="padding-top: 100px;">
+    <header style="padding-top: 200px;">
         <canvas id="canvas"></canvas>
-        <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 center-block" style="float:none">
-            <h1 class="text-center" style="color: white; margin-bottom: 30px">Find Relation</h1>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-block" style="float:none">
             <form action="${pageContext.request.contextPath}/find">
-                <div class="input-group">
-                    <input class="form-control" type="text" id="query" name="query"
+                <p class="text-center title-text">
+                    How is my
+                    <input class="title-text query_input_box" type="text" id="query" name="query"
                            placeholder="father's mother's daughter"
                     <c:if test="${requestScope.query != null}">
                            value="${requestScope.query}"
                     </c:if>
                            style="border-radius: 0">
-                    <div class="input-group-btn btn-default">
-                        <button class="btn btn-primary" style="border-radius: 0" type="submit">Submit</button>
-                    </div>
-                </div>
+                    related to me?
+                </p>
             </form>
             <c:if test="${requestScope.results != null}">
                 <ol>
                     <c:forEach var="result" items="${requestScope.results}">
-                        <h3>
+                        <h3 class="title-text">
                             <li>
                                 <c:forEach var="relation" items="${result}">
                                     ${relation}
@@ -61,8 +59,11 @@ To change this template use File | Settings | File Templates.
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
 <script src="js/canvas.js"></script>
+<script src="js/jquery.autoresize.js"></script>
 <script>
     $(function () {
+        $("input.query_input_box").autoGrowInput({minWidth:2,comfortZone:25,maxWidth:690});
+
         var availableTags = [
             <c:forEach var="relation" items="${applicationScope.all_relations}">
             "${relation}",
