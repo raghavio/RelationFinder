@@ -22,9 +22,9 @@ To change this template use File | Settings | File Templates.
 <div class="container">
     <header style="padding-top: 100px;">
         <canvas id="canvas"></canvas>
-        <div class="col-md-6 center-block" style="float:none">
-            <h1 class="text-center" style="color: white">Find Relation</h1>
-            <form action="/find">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 center-block" style="float:none">
+            <h1 class="text-center" style="color: white; margin-bottom: 30px">Find Relation</h1>
+            <form action="${pageContext.request.contextPath}/find">
                 <div class="input-group">
                     <input class="form-control" type="text" id="query" name="query"
                            placeholder="father's mother's daughter"
