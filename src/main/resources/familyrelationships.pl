@@ -6,6 +6,7 @@ male(william).
 male(raghav).
 male(david).
 male(charles).
+male(johnny).
 
 female(mary).
 female(patrica).
@@ -26,6 +27,8 @@ spouse(raghav, katrina).
 spouse(katrina, raghav).
 spouse(susan, david).
 spouse(david, susan).
+spouse(johnny, linda).
+spouse(linda, johnny).
 
 spouse(john, barbara).
 spouse(barbara, john).
