@@ -30,7 +30,6 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
                 <p class="text-center title-text">
                     How is my
                     <input class="title-text query_input_box" type="text" id="query" name="query"
-                           placeholder="father's mother's daughter"
                     <c:if test="${requestScope.query != null}">
                            value="${requestScope.query}"
                     </c:if>
