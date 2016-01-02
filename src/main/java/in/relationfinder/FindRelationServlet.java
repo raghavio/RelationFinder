@@ -37,7 +37,7 @@ public class FindRelationServlet extends HttpServlet {
 
         request.setAttribute("results", results);
         request.setAttribute("query", raw_query);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("_index.jsp");
         requestDispatcher.forward(request, response);
     }
 

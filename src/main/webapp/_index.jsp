@@ -5,6 +5,9 @@ Date: 17/12/15
 Time: 23:24
 To change this template use File | Settings | File Templates.
 --%>
+<%--
+Can't change name to index.jsp. It doesn't run the servlet on Heroku.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
