@@ -34,8 +34,6 @@ public class FindRelationServlet extends HttpServlet {
             }
         }
 
-        results = RelationsHandler.processRelations(results);
-
         request.setAttribute("results", results);
         request.setAttribute("gender", gender);
         request.setAttribute("query", raw_query);

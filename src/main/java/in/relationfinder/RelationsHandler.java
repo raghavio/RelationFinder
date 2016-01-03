@@ -24,8 +24,8 @@ public class RelationsHandler {
      *
      * @param raw_query The query input by user as it is. Ex. father's mother's sister
      * @return An Object array which contains gender of the relation and A list of relation(s).
-     *         There can be more than one relation sometimes.
-     *         Ex. grandparent's son = father and uncle.
+     * There can be more than one relation sometimes.
+     * Ex. grandparent's son = father and uncle.
      */
     public static Object[] getRelation(String raw_query) {
         String knowledgeBase = "familyrelationships.pl";
@@ -48,6 +48,7 @@ public class RelationsHandler {
                 if (!hashtable.containsKey("Result"))
                     break;
                 String result = hashtable.get("Result").toString();
+                result = processRelation(result);
                 results.add(result);
             }
         } catch (JIPSyntaxErrorException e) {
@@ -57,7 +58,7 @@ public class RelationsHandler {
         // We get the last element (The relation user wanted to know) from the query.
         String gender = getGender(relations[relations.length - 1]);
 
-        return new Object[]{ gender, results };
+        return new Object[]{gender, results};
     }
 
     /**
@@ -128,18 +129,12 @@ public class RelationsHandler {
      * Replaces underscore with space or dash if it contains '_law'.
      * So, paternal_grandfather becomes paternal grandfather and brother_in_law becomes brother-in-law.
      *
-     * @param results List of relations.
-     * @return Processed relations.
+     * @param relation The relation.
+     * @return Processed relation.
      */
-    public static List<String[]> processRelations(List<String[]> results) {
-        for (String[] result : results) {
-            for (int i = 0; i < result.length; i++) {
-                String relation = result[i];
-                String replaceBy = relation.contains("_law") ? "-" : " ";
-                result[i] = relation.replaceAll("_", replaceBy);
-            }
-        }
-        return results;
+    private static String processRelation(String relation) {
+        String replaceBy = relation.contains("_law") ? "-" : " ";
+        return relation.replaceAll("_", replaceBy);
     }
 
     private static String getGender(String relation) {
