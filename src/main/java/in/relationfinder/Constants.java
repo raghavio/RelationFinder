@@ -18,16 +18,19 @@ public class Constants {
     public static final HashMap<String, ArrayList<String>> RELATION_NAMES_MAP;
 
     /**
-     * Values of RELATION_NAMES_MAP.
-     * All other names of every relation defined in YAML file.
+     * All other names of every relation mentioned in YAML file.
      */
     public static final List<String> OTHER_RELATION_NAMES;
 
     /**
-     * Key values of RELATION_NAMES_MAP.
      * Contains relation names defined as Prolog rules in Prolog knowledgebase.
      */
-    public static final List<String> RELATION_NAMES;
+    public static final Set<String> RELATION_NAMES;
+
+    /**
+     * Key value pairs of relation and its gender.
+     */
+    public static final HashMap<String, String> GENDER;
 
     /**
      * Path to resources folder
@@ -37,21 +40,27 @@ public class Constants {
     static {
         InputStream input = Constants.class.getResourceAsStream("/relationship_names.yml");
         Yaml yaml = new Yaml();
-        RELATION_NAMES_MAP = (HashMap<String, ArrayList<String>>) yaml.load(input);
-
+        HashMap<String, HashMap<String, Object>> yamlData = (HashMap<String, HashMap<String, Object>>) yaml.load(input);
         try {
             input.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Collection<ArrayList<String>> relationNamesMap = RELATION_NAMES_MAP.values();
-        OTHER_RELATION_NAMES = new ArrayList<>(relationNamesMap.size());
-        relationNamesMap.stream().filter(otherNames -> otherNames != null).forEach(OTHER_RELATION_NAMES::addAll);
+        GENDER = new HashMap<>(yamlData.size());
+        OTHER_RELATION_NAMES = new ArrayList<>();
+        RELATION_NAMES_MAP = new HashMap<>(yamlData.size());
+        RELATION_NAMES = yamlData.keySet();
 
-        Set<String> relationNamesKey = RELATION_NAMES_MAP.keySet();
-        RELATION_NAMES = new ArrayList<>(relationNamesKey.size());
-        RELATION_NAMES.addAll(relationNamesKey.stream().collect(Collectors.toList()));
+        for (String key : RELATION_NAMES) {
+            HashMap<String, Object> data = yamlData.get(key);
+            GENDER.put(key, (String) data.get("gender"));
+            ArrayList<String> otherNames = (ArrayList<String>) data.get("other_names");
+            if (otherNames == null)
+                continue;
+            RELATION_NAMES_MAP.put(key, otherNames);
+            OTHER_RELATION_NAMES.addAll((otherNames).stream().collect(Collectors.toList()));
+        }
     }
 
 }

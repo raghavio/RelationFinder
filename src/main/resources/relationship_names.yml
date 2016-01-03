@@ -1,7 +1,3 @@
-father:
-    - papa
-    - baba
-mother:
-    - maa
-sister: ~
-brother: ~
+father: {gender: male, other_names: [papa, baba]}
+mother: {gender: female, other_names: [maa]}
+sister: {gender: female}
