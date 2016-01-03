@@ -21,10 +21,11 @@ public class FindRelationServlet extends HttpServlet {
         String raw_query = request.getParameter("query"); //Ex: father's mother's daughter
         if (raw_query == null || raw_query.isEmpty())
             raw_query = getRandomQuery(getServletConfig().getInitParameter("query"));
-        List<String> relations = RelationsHandler.getRelation(raw_query);
+        Object[] data = RelationsHandler.getRelation(raw_query); // new Object[] {gender, results}
+        String gender = (String) data[0];
+        List<String> relations = (List<String>) data[1];
 
         List<String[]> results = null;
-
         if (relations != null) {
             results = new ArrayList<>(relations.size());
             for (String relation : relations) {
@@ -36,6 +37,7 @@ public class FindRelationServlet extends HttpServlet {
         results = RelationsHandler.processRelations(results);
 
         request.setAttribute("results", results);
+        request.setAttribute("gender", gender);
         request.setAttribute("query", raw_query);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("_index.jsp");
         requestDispatcher.forward(request, response);

@@ -23,10 +23,11 @@ public class RelationsHandler {
      * Gets relation by running the Prolog query using JIProlog.
      *
      * @param raw_query The query input by user as it is. Ex. father's mother's sister
-     * @return A list of relation(s). There can be more than one relation sometimes.
-     * Ex. grandparent's son = father and uncle.
+     * @return An Object array which contains gender of the relation and A list of relation(s).
+     *         There can be more than one relation sometimes.
+     *         Ex. grandparent's son = father and uncle.
      */
-    public static List<String> getRelation(String raw_query) {
+    public static Object[] getRelation(String raw_query) {
         String knowledgeBase = "familyrelationships.pl";
         String[] relations = processQuery(raw_query);
         String prolog_query = generatePrologQuery(relations);
@@ -53,13 +54,16 @@ public class RelationsHandler {
             //TODO Logging
         }
 
-        return results;
+        // We get the last element (The relation user wanted to know) from the query.
+        String gender = getGender(relations[relations.length - 1]);
+
+        return new Object[]{ gender, results };
     }
 
     /**
      * Processes user query.
-     * Removes redundant characters and changes other relation names to actual name used in Prolog facts.
-     * For ex, if there's daddy in query it gets changed to father, because that's what we used in our Prolog knowledge base.
+     * Removes redundant characters and changes other relation names to actual name used in Prolog rules.
+     * For ex, if there's daddy in query it gets changed to father, because that's what we use in our Prolog knowledge base.
      *
      * @param raw_query The query input by user as it is.
      * @return String array of relations. Basically query.split(" ").
@@ -72,10 +76,9 @@ public class RelationsHandler {
         for (int i = 0; i < relations.length; i++) //Whoa
             if (Constants.OTHER_RELATION_NAMES.contains(relations[i]))
                 for (Entry<String, ArrayList<String>> entry : Constants.RELATION_NAMES_MAP.entrySet())
-                    if (entry.getValue() != null) //For relations with no other names defined
-                        for (String otherName : entry.getValue())
-                            if (Objects.equals(relations[i], otherName))
-                                relations[i] = entry.getKey();
+                    for (String otherName : entry.getValue())
+                        if (Objects.equals(relations[i], otherName))
+                            relations[i] = entry.getKey();
         return relations;
     }
 
@@ -139,5 +142,9 @@ public class RelationsHandler {
             }
         }
         return results;
+    }
+
+    private static String getGender(String relation) {
+        return Constants.GENDER.get(relation);
     }
 }
