@@ -116,10 +116,8 @@ public class RelationsHandler {
     public static String[] getOtherNames(String relation) {
         List<String> otherNames = Constants.RELATION_NAMES_MAP.get(relation);
         if (otherNames != null) {
-            ArrayList<String> relationNames = new ArrayList<>(otherNames);
-            relationNames.add(0, relation);
-            String[] result = new String[relationNames.size()];
-            relationNames.toArray(result);
+            String[] result = new String[otherNames.size()];
+            otherNames.toArray(result);
             return result;
         } else
             return new String[]{relation};
@@ -127,7 +125,7 @@ public class RelationsHandler {
 
     /**
      * Processes raw relationship names.
-     * Replaces underscore with space or - if it contains '_law'.
+     * Replaces underscore with space or dash if it contains '_law'.
      * So, paternal_grandfather becomes paternal grandfather and brother_in_law becomes brother-in-law.
      *
      * @param results List of relations.
