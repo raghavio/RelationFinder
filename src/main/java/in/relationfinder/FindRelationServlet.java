@@ -25,12 +25,12 @@ public class FindRelationServlet extends HttpServlet {
         String gender = (String) data[0];
         List<String> relations = (List<String>) data[1];
 
-        List<String[]> results = null;
+        List<ArrayList<String>> results = null;
         if (relations != null) {
             results = new ArrayList<>(relations.size());
             for (String relation : relations) {
-                String[] allNames = RelationsHandler.getOtherNames(relation);
-                results.add(allNames);
+                ArrayList<String> otherNames = RelationsHandler.getOtherNames(relation);
+                results.add(otherNames);
             }
         }
 

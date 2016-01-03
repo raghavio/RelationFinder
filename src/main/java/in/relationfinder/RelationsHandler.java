@@ -112,16 +112,11 @@ public class RelationsHandler {
     /**
      * Returns other names of a relation.
      *
-     * @param relation Relation
+     * @param relation Relation whose other names we return if any.
+     * @return A list of other relation names.
      */
-    public static String[] getOtherNames(String relation) {
-        List<String> otherNames = Constants.RELATION_NAMES_MAP.get(relation);
-        if (otherNames != null) {
-            String[] result = new String[otherNames.size()];
-            otherNames.toArray(result);
-            return result;
-        } else
-            return new String[]{relation};
+    public static ArrayList<String> getOtherNames(String relation) {
+        return Constants.RELATION_NAMES_MAP.get(relation);
     }
 
     /**
