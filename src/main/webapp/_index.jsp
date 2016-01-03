@@ -42,11 +42,31 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
             <c:set var="results_length" value="${fn:length(requestScope.results)}"/>
             <c:if test="${results_length != 0}">
                 <p class="text-center title-text">
+                    <c:choose>
+                        <c:when test="${requestScope.gender == 'male'}">
+                            He
+                        </c:when>
+                        <c:when test="${requestScope.gender == 'female'}">
+                            She
+                        </c:when>
+                        <c:otherwise>
+                            It
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${results_length == 1}">
+                            is
+                        </c:when>
+                        <c:otherwise>
+                            could be
+                        </c:otherwise>
+                    </c:choose>
+                    your
                     <c:forEach var="result" items="${requestScope.results}" varStatus="loop">
                         <b style="text-decoration: underline;">${result.key}</b><c:set var="remaining" value="${results_length - (loop.index+1)}"/>
                         <c:if test="${remaining > 1}">, </c:if>
                         <c:if test="${remaining == 1}"> or </c:if>
-                    </c:forEach>
+                    </c:forEach>.
                 </p>
             </c:if>
         </div>
