@@ -8,8 +8,10 @@ To change this template use File | Settings | File Templates.
 <%--
 Can't change name to index.jsp. It doesn't run the servlet on Heroku.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
 <head>
     <title></title>
@@ -37,18 +39,15 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
                     related to me?
                 </p>
             </form>
-            <c:if test="${requestScope.results != null}">
-                <ol>
-                    <c:forEach var="result" items="${requestScope.results}">
-                        <h3 class="title-text">
-                            <li>
-                                <c:forEach var="relation" items="${result}">
-                                    ${relation}
-                                </c:forEach>
-                            </li>
-                        </h3>
+            <c:set var="results_length" value="${fn:length(requestScope.results)}"/>
+            <c:if test="${results_length != 0}">
+                <p class="text-center title-text">
+                    <c:forEach var="result" items="${requestScope.results}" varStatus="loop">
+                        <b style="text-decoration: underline;">${result.key}</b><c:set var="remaining" value="${results_length - (loop.index+1)}"/>
+                        <c:if test="${remaining > 1}">, </c:if>
+                        <c:if test="${remaining == 1}"> or </c:if>
                     </c:forEach>
-                </ol>
+                </p>
             </c:if>
         </div>
     </header>
@@ -64,7 +63,7 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
 <script src="js/jquery.autoresize.js"></script>
 <script>
     $(function () {
-        $("input.query_input_box").autoGrowInput({minWidth:2,comfortZone:25,maxWidth:690});
+        $("input.query_input_box").autoGrowInput({minWidth: 2, comfortZone: 25, maxWidth: 690});
 
         var availableTags = [
             <c:forEach var="relation" items="${applicationScope.all_relations}">

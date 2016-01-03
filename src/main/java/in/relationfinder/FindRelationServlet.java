@@ -2,6 +2,7 @@ package in.relationfinder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import javax.servlet.RequestDispatcher;
@@ -25,12 +26,12 @@ public class FindRelationServlet extends HttpServlet {
         String gender = (String) data[0];
         List<String> relations = (List<String>) data[1];
 
-        List<ArrayList<String>> results = null;
+        HashMap<String, ArrayList<String>> results = null;
         if (relations != null) {
-            results = new ArrayList<>(relations.size());
+            results = new HashMap<>(relations.size());
             for (String relation : relations) {
                 ArrayList<String> otherNames = RelationsHandler.getOtherNames(relation);
-                results.add(otherNames);
+                results.put(relation, otherNames);
             }
         }
 
