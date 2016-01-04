@@ -74,12 +74,14 @@ public class RelationsHandler {
         query = raw_query.replaceAll("'s", ""); //Replace all apostrophe s
         String[] relations = query.split(" ");
 
-        for (int i = 0; i < relations.length; i++) //Whoa
+        for (int i = 0; i < relations.length; i++) { //Whoa
             if (Constants.OTHER_RELATION_NAMES.contains(relations[i]))
                 for (Entry<String, ArrayList<String>> entry : Constants.RELATION_NAMES_MAP.entrySet())
                     for (String otherName : entry.getValue())
                         if (Objects.equals(relations[i], otherName))
                             relations[i] = entry.getKey();
+            relations[i] = relations[i].replaceAll("-", "_").replaceAll(" ", "_");
+        }
         return relations;
     }
 
