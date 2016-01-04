@@ -130,8 +130,8 @@ phupha(Phupha, Y) :- bua(Bua, Y), husband(Phupha, Bua).
 
 % Mama = Mother's brother
 % Mami = Mama's wife
-mama(Mama, Y) :- mother(Mother, Y), brother(Mama, Mother).
-mami(Mami, Y) :- mama(Mama, Y), wife(Mami, Mama).
+maama(Mama, Y) :- mother(Mother, Y), brother(Mama, Mother).
+maami(Mami, Y) :- mama(Mama, Y), wife(Mami, Mama).
 
 % Mausii = Mother's sister
 % Mausaa = Mausii's Husband
