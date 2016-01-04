@@ -1,3 +1,28 @@
-father: {gender: male, other_names: [papa, baba]}
+husband: {gender: male}
+wife: {gender: female}
+father: {gender: male, other_names: [papa, dad]}
 mother: {gender: female, other_names: [maa]}
+son: {gender: male}
+daughter: {gender: female}
 sister: {gender: female}
+brother: {gender: male}
+father_in_law: {gender: male}
+mother_in_law: {gender: female}
+son_in_law: {gender: male}
+daughter_in_law: {gender: female}
+bhabhi: {gender: female}
+jija: {gender: male}
+sister_in_law: {gender: female}
+brother_in_law: {gender: male}
+uncle: {gender: male, other_names: [chacha, bade papa, taaya]}
+aunty: {gender: female, other_names: [chachi, badi mummy, taayi]}
+bua: {gender: female}
+phupha: {gender: male}
+maama: {gender: male}
+maami: {gender: female}
+mausii: {gender: female}
+mausaa: {gender: male}
+bhatija: {gender: male}
+bhatiji: {gender: female}
+bhanja: {gender: male}
+bhanji: {gender: female}
