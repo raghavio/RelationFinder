@@ -152,6 +152,6 @@ query_family(P1, P2, P) :-
                 paternal_grandson, paternal_granddaughter, paternal_grandfather,
                 paternal_grandmother, maternal_grandfather, maternal_grandmother,
                 maternal_grandson, maternal_granddaughter, bhabhi, jija,
-                sister_in_law, brother_in_law, uncle, aunty, bua, phupha, mama,
-                mami, mausii, mausaa, bhatijaa, bhatiiji, bhanja, bhanji]),
+                sister_in_law, brother_in_law, uncle, aunty, bua, phupha, maama,
+                maami, mausii, mausaa, bhatija, bhatiji, bhanja, bhanji]),
     call(P, P1, P2).
