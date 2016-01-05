@@ -161,12 +161,13 @@ bhanja(Bhanja, Y) :- sister(Sister, Y), son(Bhanja, _, Sister).
 bhanji(Bhanji, Y) :- sister(Sister, Y), daughter(Bhanji, _, Sister).
 
 % jitotee(Jitotee, Y) :- husband(Husband, Y),
-query_family(P1, P2, P) :-
-    member(P, [husband, wife, father, mother, son, daughter, sister, brother,
+
+find_relation(Relation, X, Y) :-
+    member(Relation, [husband, wife, father, mother, son, daughter, sister, brother,
                 father_in_law, mother_in_law, son_in_law, daughter_in_law,
                 paternal_grandson, paternal_granddaughter, paternal_grandfather,
                 paternal_grandmother, maternal_grandfather, maternal_grandmother,
                 maternal_grandson, maternal_granddaughter, bhabhi, jija,
                 sister_in_law, brother_in_law, uncle, aunty, bua, phupha, maama,
                 maami, mausii, mausaa, bhatija, bhatiji, bhanja, bhanji]),
-    call(P, P1, P2).
+    call(Relation, X, Y).

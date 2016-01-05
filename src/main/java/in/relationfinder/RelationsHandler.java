@@ -98,14 +98,13 @@ public class RelationsHandler {
 
         char alphabet = 'A';
         for (int i = 0; i < relations.length; i++) {
-            builder.append("query_family(").append(alphabet).append(", ");
+            builder.append("call(").append(relations[i]).append(", ").append(alphabet).append(", ");
             if (i == 0)
-                builder.append("raghav, ");
+                builder.append("raghav), ");
             else
-                builder.append((char) (alphabet - 1)).append(", ");
-            builder.append(relations[i]).append("), ");
+                builder.append((char) (alphabet - 1)).append("), ");
             if (i == relations.length - 1)
-                builder.append("query_family(").append(alphabet).append(", raghav, Result).");
+                builder.append("find_relation(Result, ").append(alphabet).append(", raghav).");
             alphabet++;
         }
         return builder.toString();
