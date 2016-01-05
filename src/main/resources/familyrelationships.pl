@@ -105,23 +105,23 @@ grandmother(Grandmother, Grandchild) :-
     paternal_grandmother(Grandmother, Grandchild);
     maternal_grandmother(Grandmother, Grandchild).
 
-dauhitra(Grandson, Grandparent) :-
-    male(Grandparent), dauhitra(Grandson, Grandparent, _);
-    female(Grandparent), dauhitra(Grandson, _, Grandparent).
-dauhitra(Grandson, Grandfather, Grandmother) :-
+navaasa(Grandson, Grandparent) :-
+    male(Grandparent), navaasa(Grandson, Grandparent, _);
+    female(Grandparent), navaasa(Grandson, _, Grandparent).
+navaasa(Grandson, Grandfather, Grandmother) :-
     parent(Grandfather, Grandmother, Daughter), mother(Daughter, Grandson), male(Grandson).
-naatin(Granddaughter, Grandparent) :-
-    male(Grandparent), naatin(Granddaughter, Grandparent, _);
-    female(Grandparent), naatin(Granddaughter, _, Grandparent).
-naatin(Granddaughter, Grandfather, Grandmother) :-
+navaasi(Granddaughter, Grandparent) :-
+    male(Grandparent), navaasi(Granddaughter, Grandparent, _);
+    female(Grandparent), navaasi(Granddaughter, _, Grandparent).
+navaasi(Granddaughter, Grandfather, Grandmother) :-
     parent(Grandfather, Grandmother, Daughter), mother(Daughter, Granddaughter), female(Granddaughter).
 
 grandson(Grandson, Grandparent) :-
     pota(Grandson, Grandparent);
-    dauhitra(Grandson, Grandparent).
+    navaasa(Grandson, Grandparent).
 granddaughter(Granddaughter, Grandparent) :-
     poti(Granddaughter, Grandparent);
-    naatin(Granddaughter, Grandparent).
+    navaasi(Granddaughter, Grandparent).
 
 
 % Bhabhi = Brother's wife
@@ -167,7 +167,7 @@ find_relation(Relation, X, Y) :-
                 father_in_law, mother_in_law, son_in_law, daughter_in_law,
                 pota, poti, paternal_grandfather,
                 paternal_grandmother, maternal_grandfather, maternal_grandmother,
-                dauhitra, naatin, bhabhi, jija,
+                navaasa, navaasi, bhabhi, jija,
                 sister_in_law, brother_in_law, uncle, aunty, bua, phupha, maama,
                 maami, mausii, mausaa, bhatija, bhatiji, bhanja, bhanji]),
     call(Relation, X, Y).
