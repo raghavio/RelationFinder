@@ -77,15 +77,15 @@ daughter_in_law(DIL, PIL) :-
     female(PIL), daughter_in_law(DIL, _, PIL).
 daughter_in_law(DIL, Father, Mother) :- female(DIL), spouse(Son, DIL), parent(Father, Mother, Son).
 
-paternal_grandson(Grandson, Grandparent) :-
-    male(Grandparent), paternal_grandson(Grandson, Grandparent, _);
-    female(Grandparent), paternal_grandson(Grandson, _, Grandparent).
-paternal_grandson(Grandson, Grandfather, Grandmother) :-
+pota(Grandson, Grandparent) :-
+    male(Grandparent), pota(Grandson, Grandparent, _);
+    female(Grandparent), pota(Grandson, _, Grandparent).
+pota(Grandson, Grandfather, Grandmother) :-
     parent(Grandfather, Grandmother, Son), son(Grandson, Son, _).
-paternal_granddaughter(Granddaughter, Grandparent) :-
-    male(Grandparent), paternal_granddaughter(Granddaughter, Grandparent, _);
-    female(Grandparent), paternal_granddaughter(Granddaughter, _, Grandparent).
-paternal_granddaughter(Granddaughter, Grandfather, Grandmother) :-
+poti(Granddaughter, Grandparent) :-
+    male(Grandparent), poti(Granddaughter, Grandparent, _);
+    female(Grandparent), poti(Granddaughter, _, Grandparent).
+poti(Granddaughter, Grandfather, Grandmother) :-
     parent(Grandfather, Grandmother, Son), daughter(Granddaughter, Son, _).
 
 paternal_grandfather(Grandfather, Y) :-
@@ -105,23 +105,23 @@ grandmother(Grandmother, Grandchild) :-
     paternal_grandmother(Grandmother, Grandchild);
     maternal_grandmother(Grandmother, Grandchild).
 
-maternal_grandson(Grandson, Grandparent) :-
-    male(Grandparent), maternal_grandson(Grandson, Grandparent, _);
-    female(Grandparent), maternal_grandson(Grandson, _, Grandparent).
-maternal_grandson(Grandson, Grandfather, Grandmother) :-
+dauhitra(Grandson, Grandparent) :-
+    male(Grandparent), dauhitra(Grandson, Grandparent, _);
+    female(Grandparent), dauhitra(Grandson, _, Grandparent).
+dauhitra(Grandson, Grandfather, Grandmother) :-
     parent(Grandfather, Grandmother, Daughter), mother(Daughter, Grandson), male(Grandson).
-maternal_granddaughter(Granddaughter, Grandparent) :-
-    male(Grandparent), maternal_granddaughter(Granddaughter, Grandparent, _);
-    female(Grandparent), maternal_granddaughter(Granddaughter, _, Grandparent).
-maternal_granddaughter(Granddaughter, Grandfather, Grandmother) :-
+naatin(Granddaughter, Grandparent) :-
+    male(Grandparent), naatin(Granddaughter, Grandparent, _);
+    female(Grandparent), naatin(Granddaughter, _, Grandparent).
+naatin(Granddaughter, Grandfather, Grandmother) :-
     parent(Grandfather, Grandmother, Daughter), mother(Daughter, Granddaughter), female(Granddaughter).
 
 grandson(Grandson, Grandparent) :-
-    paternal_grandson(Grandson, Grandparent);
-    maternal_grandson(Grandson, Grandparent).
+    pota(Grandson, Grandparent);
+    dauhitra(Grandson, Grandparent).
 granddaughter(Granddaughter, Grandparent) :-
-    paternal_granddaughter(Granddaughter, Grandparent);
-    maternal_granddaughter(Granddaughter, Grandparent).
+    poti(Granddaughter, Grandparent);
+    naatin(Granddaughter, Grandparent).
 
 
 % Bhabhi = Brother's wife
@@ -165,9 +165,9 @@ bhanji(Bhanji, Y) :- sister(Sister, Y), daughter(Bhanji, _, Sister).
 find_relation(Relation, X, Y) :-
     member(Relation, [husband, wife, father, mother, son, daughter, sister, brother,
                 father_in_law, mother_in_law, son_in_law, daughter_in_law,
-                paternal_grandson, paternal_granddaughter, paternal_grandfather,
+                pota, poti, paternal_grandfather,
                 paternal_grandmother, maternal_grandfather, maternal_grandmother,
-                maternal_grandson, maternal_granddaughter, bhabhi, jija,
+                dauhitra, naatin, bhabhi, jija,
                 sister_in_law, brother_in_law, uncle, aunty, bua, phupha, maama,
                 maami, mausii, mausaa, bhatija, bhatiji, bhanja, bhanji]),
     call(Relation, X, Y).
