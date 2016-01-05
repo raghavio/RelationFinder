@@ -26,3 +26,15 @@ bhatija: {gender: male}
 bhatiji: {gender: female}
 bhanja: {gender: male}
 bhanji: {gender: female}
+grandfather: {gender: male}
+grandmother: {gender: female}
+grandson: {gender: male}
+granddaughter: {gender: female}
+paternal_grandfather: {gender: male, other_names: [dada]}
+paternal_grandmother: {gender: female, other_names: [dadi]}
+maternal_grandfather: {gender: male, other_names: [nana]}
+maternal_grandmother: {gender: female, other_names: [nani]}
+pota: {gender: male}
+poti: {gender: female}
+navaasa: {gender: male, other_names: [dauhitra]}
+navaasi: {gender: female, other_names: [naatin, dauhiti]}
