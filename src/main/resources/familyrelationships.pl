@@ -98,6 +98,13 @@ maternal_grandfather(Grandfather, Y) :-
 maternal_grandmother(Grandmother, Y) :-
     mother(Mother, Y), mother(Grandmother, Mother).
 
+grandfather(Grandfather, Grandchild) :-
+    paternal_grandfather(Grandfather, Grandchild);
+    maternal_grandfather(Grandfather, Grandchild).
+grandmother(Grandmother, Grandchild) :-
+    paternal_grandmother(Grandmother, Grandchild);
+    maternal_grandmother(Grandmother, Grandchild).
+
 maternal_grandson(Grandson, Grandparent) :-
     male(Grandparent), maternal_grandson(Grandson, Grandparent, _);
     female(Grandparent), maternal_grandson(Grandson, _, Grandparent).
@@ -108,6 +115,14 @@ maternal_granddaughter(Granddaughter, Grandparent) :-
     female(Grandparent), maternal_granddaughter(Granddaughter, _, Grandparent).
 maternal_granddaughter(Granddaughter, Grandfather, Grandmother) :-
     parent(Grandfather, Grandmother, Daughter), mother(Daughter, Granddaughter), female(Granddaughter).
+
+grandson(Grandson, Grandparent) :-
+    paternal_grandson(Grandson, Grandparent);
+    maternal_grandson(Grandson, Grandparent).
+granddaughter(Granddaughter, Grandparent) :-
+    paternal_granddaughter(Granddaughter, Grandparent);
+    maternal_granddaughter(Granddaughter, Grandparent).
+
 
 % Bhabhi = Brother's wife
 bhabhi(Bhabhi, Y) :- brother(Brother, Y), female(Bhabhi), spouse(Bhabhi, Brother).
