@@ -68,6 +68,7 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
                         <c:if test="${remaining == 1}"> or </c:if>
                     </c:forEach>.
                 </p>
+                <div id="chart_div"></div>
             </c:if>
         </div>
     </header>
@@ -81,8 +82,26 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
 <script src="js/canvas.js"></script>
 <script src="js/jquery.autoresize.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
     $(function () {
+
+        google.charts.load('current', {packages:["orgchart"]});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Name');
+            data.addColumn('string', 'Descendant');
+
+            data.addRows([]);
+
+            // Create the chart.
+            var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+            // Draw the chart, setting the allowHtml option to true for the tooltips.
+            chart.draw(data, {allowHtml:true});
+        }
+
         $("input.query_input_box").autoGrowInput({minWidth: 2, comfortZone: 25, maxWidth: 690});
 
         var availableTags = [
