@@ -133,20 +133,20 @@ jija(JijaJi, Y) :- sister(Sister, Y), husband(JijaJi, Sister).
 sister_in_law(SIL, Y) :- spouse(X, Y), sister(SIL, X).
 brother_in_law(BIL, Y) :- spouse(X, Y), brother(BIL, X).
 
-% Uncle = Father's brother
-% Aunty = Uncle's wife
-uncle(Uncle, Y) :- father(Father, Y), brother(Uncle, Father).
-aunty(Aunty, Y) :- uncle(Uncle, Y), wife(Aunty, Uncle).
+% chacha = Father's brother
+% chachi = chacha's wife
+chacha(Chacha, Y) :- father(Father, Y), brother(Chacha, Father).
+chachi(Chachi, Y) :- chacha(Chacha, Y), wife(Chachi, Chacha).
 
 % Bua = Father's sister
 % Phupha = linda's husband
 bua(Bua, Y) :- father(Father, Y), sister(Bua, Father).
 phupha(Phupha, Y) :- bua(Bua, Y), husband(Phupha, Bua).
 
-% Mama = Mother's brother
-% Mami = Mama's wife
-maama(Mama, Y) :- mother(Mother, Y), brother(Mama, Mother).
-maami(Mami, Y) :- mama(Mama, Y), wife(Mami, Mama).
+% maama = Mother's brother
+% maami = maama's wife
+maama(Maama, Y) :- mother(Mother, Y), brother(Maama, Mother).
+maami(Maami, Y) :- maama(Maama, Y), wife(Maami, Maama).
 
 % Mausii = Mother's sister
 % Mausaa = Mausii's Husband
@@ -168,6 +168,6 @@ find_relation(Relation, X, Y) :-
                 pota, poti, paternal_grandfather,
                 paternal_grandmother, maternal_grandfather, maternal_grandmother,
                 navaasa, navaasi, bhabhi, jija,
-                sister_in_law, brother_in_law, uncle, aunty, bua, phupha, maama,
+                sister_in_law, brother_in_law, chacha, chachi, bua, phupha, maama,
                 maami, mausii, mausaa, bhatija, bhatiji, bhanja, bhanji]),
     call(Relation, X, Y).

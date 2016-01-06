@@ -14,8 +14,8 @@ bhabhi: {gender: female}
 jija: {gender: male}
 sister_in_law: {gender: female}
 brother_in_law: {gender: male}
-uncle: {gender: male, other_names: [chacha, bade papa, taaya]}
-aunty: {gender: female, other_names: [chachi, badi mummy, taayi]}
+chacha: {gender: male, other_names: [bade papa, taaya]}
+chachi: {gender: female, other_names: [badi mummy, taayi]}
 bua: {gender: female}
 phupha: {gender: male}
 maama: {gender: male}
