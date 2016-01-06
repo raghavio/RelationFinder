@@ -58,7 +58,7 @@ public class RelationsHandler {
         // We get the last element (The relation user wanted to know) from the query.
         String gender = getGender(relations[relations.length - 1]);
 
-        return new Object[]{gender, results};
+        return new Object[]{gender, results, relations};
     }
 
     /**

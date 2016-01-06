@@ -94,7 +94,7 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
             data.addColumn('string', 'Name');
             data.addColumn('string', 'Descendant');
 
-            data.addRows([]);
+            data.addRows([${requestScope.chart_array}]);
 
             // Create the chart.
             var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));

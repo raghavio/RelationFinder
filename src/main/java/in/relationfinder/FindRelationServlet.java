@@ -1,10 +1,7 @@
 package in.relationfinder;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +32,8 @@ public class FindRelationServlet extends HttpServlet {
             }
         }
 
+        String array = getOrgChatArray((String[]) data[2]);
+        request.setAttribute("chart_array", array);
         request.setAttribute("results", results);
         request.setAttribute("gender", gender);
         request.setAttribute("query", raw_query);
@@ -55,6 +54,46 @@ public class FindRelationServlet extends HttpServlet {
         randomQuery = randomQuery.trim();
         return randomQuery;
 
+    }
+
+    private String getOrgChatArray(String[] relations) {
+        TreeMap<Integer, List<String>> result = new TreeMap<>(Collections.reverseOrder());
+        String[] relation_with_self = new String[relations.length + 1];
+        relation_with_self[0] = "self";
+        System.arraycopy(relations, 0, relation_with_self, 1, relation_with_self.length - 1);
+
+        int sum = 0;
+        for (String relation : relation_with_self) {
+            int level = 0;
+            if (relation.equals("father") || relation.equals("mother"))
+                level = 1;
+            else if (relation.equals("son") || relation.equals("daughter"))
+                level = -1;
+
+            sum += level;
+            if (result.get(sum) == null) {
+                List<String> relations_on_level = new ArrayList<>();
+                relations_on_level.add(relation);
+                result.put(sum, relations_on_level);
+            } else {
+                result.get(sum).add(relation);
+            }
+        }
+
+        StringBuilder array = new StringBuilder();
+        for (Integer key : result.keySet()) {
+            for (String values : result.get(key)) {
+                String name = key + " " + values;
+                List<String> parents = result.get(key + 1);
+                if (parents == null) {
+                    array.append("['").append(name).append("', ''],");
+                } else {
+                    String parent = key+1 + " " + parents.get(0);
+                    array.append("['").append(name).append("', '").append(parent).append("'],");
+                }
+            }
+        }
+        return array.toString();
     }
 
 }
