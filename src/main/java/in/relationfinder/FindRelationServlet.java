@@ -22,6 +22,7 @@ public class FindRelationServlet extends HttpServlet {
         String raw_query = request.getParameter("query"); //Ex: father's mother's daughter
         if (raw_query == null || raw_query.isEmpty())
             raw_query = getRandomQuery(getServletConfig().getInitParameter("query"));
+        raw_query = raw_query.toLowerCase();
         Object[] data = RelationsHandler.getRelation(raw_query); // new Object[] {gender, results}
         String gender = (String) data[0];
         List<String> relations = (List<String>) data[1];
