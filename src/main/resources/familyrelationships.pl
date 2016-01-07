@@ -1,4 +1,18 @@
-% Facts
+% User's Father's family
+male(james).
+male(user).
+male(john).
+female(mary).
+female(patricia).
+
+% User's Father's family
+spouse(james, mary).
+spouse(mary, james).
+
+% User's Father's family
+parent(james, mary, user).
+parent(james, mary, john).
+parent(james, mary, patricia).
 
 husband(Husband, Woman) :- male(Husband), spouse(Husband, Woman).
 wife(Wife, Man) :- female(Wife), spouse(Wife, Man).
