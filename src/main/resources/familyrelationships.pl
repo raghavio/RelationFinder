@@ -16,6 +16,11 @@ male(william).
 female(neha).
 female(linda).
 
+% Sister's family
+male(david).
+male(richard).
+female(susan).
+
 % Paternal Grandfather's family
 spouse(robert, jennifer).
 
@@ -24,6 +29,9 @@ spouse(james, mary).
 
 % User's family
 spouse(user, neha).
+
+% Sister's family
+spouse(patricia, david).
 
 % Grandfather's family
 parent(robert, jennifer, james).
@@ -38,6 +46,10 @@ parent(james, mary, patricia).
 % User's family
 parent(user, neha, william).
 parent(user, neha, linda).
+
+% Sister's family
+parent(david, patricia, richard).
+parent(david, patricia, susan).
 
 husband(Husband, Woman) :- male(Husband), spouse(Husband, Woman); male(Husband), spouse(Woman, Husband).
 wife(Wife, Man) :- female(Wife), spouse(Wife, Man); female(Wife), spouse(Man, Wife).
