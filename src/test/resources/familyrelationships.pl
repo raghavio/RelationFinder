@@ -14,8 +14,8 @@ parent(james, mary, user).
 parent(james, mary, john).
 parent(james, mary, patricia).
 
-husband(Husband, Woman) :- male(Husband), spouse(Husband, Woman).
-wife(Wife, Man) :- female(Wife), spouse(Wife, Man).
+husband(Husband, Woman) :- male(Husband), spouse(Husband, Woman); male(Husband), spouse(Woman, Husband).
+wife(Wife, Man) :- female(Wife), spouse(Wife, Man); female(Wife), spouse(Man, Wife).
 
 father(Father, Child) :- male(Father), parent(Father, _, Child).
 mother(Mother, Child) :- female(Mother), parent(_, Mother, Child).
