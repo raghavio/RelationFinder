@@ -1,4 +1,4 @@
-% Paternal Grandfather's family
+% Paternal Grandparents's family
 male(robert).
 male(michael).
 female(jennifer).
@@ -21,7 +21,18 @@ male(david).
 male(richard).
 female(susan).
 
-% Paternal Grandfather's family
+% Maternal Grandparents's family
+male(joseph).
+male(charles).
+female(sarah).
+female(nancy).
+
+% Brother's family
+male(daniel).
+female(lisa).
+female(donna).
+
+% Paternal Grandparents's family
 spouse(robert, jennifer).
 
 % Father's family
@@ -33,7 +44,13 @@ spouse(user, neha).
 % Sister's family
 spouse(patricia, david).
 
-% Grandfather's family
+% Maternal Grandparent's family
+spouse(joseph, sarah).
+
+% Brother's family
+spouse(john, lisa).
+
+% Grandparents's family
 parent(robert, jennifer, james).
 parent(robert, jennifer, michael).
 parent(robert, jennifer, elizabeth).
@@ -50,6 +67,17 @@ parent(user, neha, linda).
 % Sister's family
 parent(david, patricia, richard).
 parent(david, patricia, susan).
+
+% Maternal Grandparent's family
+parent(joseph, sarah, charles).
+parent(joseph, sarah, nancy).
+parent(joseph, sarah, mary).
+
+% Brother's family
+parent(john, lisa, daniel).
+parent(john, lisa, donna).
+
+% RULES
 
 husband(Husband, Woman) :- male(Husband), spouse(Husband, Woman); male(Husband), spouse(Woman, Husband).
 wife(Wife, Man) :- female(Wife), spouse(Wife, Man); female(Wife), spouse(Man, Wife).
