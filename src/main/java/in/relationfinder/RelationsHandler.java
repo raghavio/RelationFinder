@@ -100,11 +100,11 @@ public class RelationsHandler {
         for (int i = 0; i < relations.length; i++) {
             builder.append("call(").append(relations[i]).append(", ").append(alphabet).append(", ");
             if (i == 0)
-                builder.append("raghav), ");
+                builder.append("user), ");
             else
                 builder.append((char) (alphabet - 1)).append("), ");
             if (i == relations.length - 1)
-                builder.append("find_relation(Result, ").append(alphabet).append(", raghav).");
+                builder.append("find_relation(Result, ").append(alphabet).append(", user).");
             alphabet++;
         }
         return builder.toString();
