@@ -99,17 +99,21 @@ sister(Sister, Y) :-
 brother(Brother, Y) :-
     male(Brother), parent(Father, Mother, Brother), parent(Father, Mother, Y), Brother \= Y.
 
-father_in_law(FIL, Y) :- male(FIL), spouse(Spouse, Y), parent(FIL, _, Spouse).
-mother_in_law(MIL, Y) :- female(MIL), spouse(Spouse, Y), parent(_, MIL, Spouse).
+father_in_law(FIL, Y) :- male(FIL), spouse(Spouse, Y), parent(FIL, _, Spouse);
+                         male(FIL), spouse(Y, Spouse), parent(FIL, _, Spouse).
+mother_in_law(MIL, Y) :- female(MIL), spouse(Spouse, Y), parent(_, MIL, Spouse);
+                         female(MIL), spouse(Y, Spouse), parent(_, MIL, Spouse).
 
 son_in_law(SIL, PIL) :-
     male(PIL), son_in_law(SIL, PIL, _);
     female(PIL), son_in_law(SIL, _, PIL).
-son_in_law(SIL, Father, Mother) :- male(SIL), spouse(Daughter, SIL), parent(Father, Mother, Daughter).
+son_in_law(SIL, Father, Mother) :- male(SIL), spouse(Daughter, SIL), parent(Father, Mother, Daughter);
+                                   male(SIL), spouse(SIL, Daughter), parent(Father, Mother, Daughter).
 daughter_in_law(DIL, PIL) :-
     male(PIL), daughter_in_law(DIL, PIL, _);
     female(PIL), daughter_in_law(DIL, _, PIL).
-daughter_in_law(DIL, Father, Mother) :- female(DIL), spouse(Son, DIL), parent(Father, Mother, Son).
+daughter_in_law(DIL, Father, Mother) :- female(DIL), spouse(Son, DIL), parent(Father, Mother, Son);
+                                        female(DIL), spouse(DIL, Son), parent(Father, Mother, Son).
 
 pota(Grandson, Grandparent) :-
     male(Grandparent), pota(Grandson, Grandparent, _);
@@ -159,13 +163,16 @@ granddaughter(Granddaughter, Grandparent) :-
 
 
 % Bhabhi = Brother's wife
-bhabhi(Bhabhi, Y) :- brother(Brother, Y), female(Bhabhi), spouse(Bhabhi, Brother).
+bhabhi(Bhabhi, Y) :- brother(Brother, Y), female(Bhabhi), spouse(Bhabhi, Brother);
+                     brother(Brother, Y), female(Bhabhi), spouse(Brother, Bhabhi).
 
 % Jija = Sister's husband
 jija(JijaJi, Y) :- sister(Sister, Y), husband(JijaJi, Sister).
 
-sister_in_law(SIL, Y) :- spouse(X, Y), sister(SIL, X).
-brother_in_law(BIL, Y) :- spouse(X, Y), brother(BIL, X).
+sister_in_law(SIL, Y) :- spouse(X, Y), sister(SIL, X);
+                         spouse(Y, X), sister(SIL, X).
+brother_in_law(BIL, Y) :- spouse(X, Y), brother(BIL, X);
+                          spouse(Y, X), brother(BIL, X).
 
 % chacha = Father's brother
 % chachi = chacha's wife
