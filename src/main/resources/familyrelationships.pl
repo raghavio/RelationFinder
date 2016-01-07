@@ -11,11 +11,19 @@ male(john).
 female(mary).
 female(patricia).
 
+% User's family
+male(william).
+female(neha).
+female(linda).
+
 % Paternal Grandfather's family
 spouse(robert, jennifer).
 
 % Father's family
 spouse(james, mary).
+
+% User's family
+spouse(user, neha).
 
 % Grandfather's family
 parent(robert, jennifer, james).
@@ -26,6 +34,10 @@ parent(robert, jennifer, elizabeth).
 parent(james, mary, user).
 parent(james, mary, john).
 parent(james, mary, patricia).
+
+% User's family
+parent(user, neha, william).
+parent(user, neha, linda).
 
 husband(Husband, Woman) :- male(Husband), spouse(Husband, Woman); male(Husband), spouse(Woman, Husband).
 wife(Wife, Man) :- female(Wife), spouse(Wife, Man); female(Wife), spouse(Man, Wife).
