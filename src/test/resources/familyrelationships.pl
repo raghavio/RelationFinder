@@ -1,15 +1,28 @@
-% User's Father's family
+% Paternal Grandfather's family
+male(robert).
+male(michael).
+female(jennifer).
+female(elizabeth).
+
+% Father's family
 male(james).
 male(user).
 male(john).
 female(mary).
 female(patricia).
 
-% User's Father's family
-spouse(james, mary).
-spouse(mary, james).
+% Paternal Grandfather's family
+spouse(robert, jennifer).
 
-% User's Father's family
+% Father's family
+spouse(james, mary).
+
+% Grandfather's family
+parent(robert, jennifer, james).
+parent(robert, jennifer, michael).
+parent(robert, jennifer, elizabeth).
+
+% Father's family
 parent(james, mary, user).
 parent(james, mary, john).
 parent(james, mary, patricia).
