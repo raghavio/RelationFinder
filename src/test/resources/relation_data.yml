@@ -1,0 +1,40 @@
+husband: {gender: male}
+wife: {gender: female}
+father: {gender: male, other_names: [papa, dad]}
+mother: {gender: female, other_names: [maa]}
+son: {gender: male}
+daughter: {gender: female}
+sister: {gender: female}
+brother: {gender: male}
+father_in_law: {gender: male}
+mother_in_law: {gender: female}
+son_in_law: {gender: male}
+daughter_in_law: {gender: female}
+bhabhi: {gender: female}
+jija: {gender: male}
+sister_in_law: {gender: female}
+brother_in_law: {gender: male}
+chacha: {gender: male, other_names: [bade papa, taaya]}
+chachi: {gender: female, other_names: [badi mummy, taayi]}
+bua: {gender: female}
+phupha: {gender: male}
+maama: {gender: male}
+maami: {gender: female}
+mausii: {gender: female}
+mausaa: {gender: male}
+bhatija: {gender: male}
+bhatiji: {gender: female}
+bhanja: {gender: male}
+bhanji: {gender: female}
+grandfather: {gender: male}
+grandmother: {gender: female}
+grandson: {gender: male}
+granddaughter: {gender: female}
+paternal_grandfather: {gender: male, other_names: [dada]}
+paternal_grandmother: {gender: female, other_names: [dadi]}
+maternal_grandfather: {gender: male, other_names: [nana]}
+maternal_grandmother: {gender: female, other_names: [nani]}
+pota: {gender: male}
+poti: {gender: female}
+navaasa: {gender: male, other_names: [dauhitra]}
+navaasi: {gender: female, other_names: [naatin, dauhiti]}
