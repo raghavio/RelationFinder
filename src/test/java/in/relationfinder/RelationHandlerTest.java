@@ -18,8 +18,16 @@ public class RelationHandlerTest {
     public void fathersFamily() {
         assertEquals("father", getRelation("mother's husband").get(0));
         assertEquals("mother", getRelation("father's wife").get(0));
-        assertEquals("brother", getRelation("brother's").get(0));
+        assertEquals("brother", getRelation("brother").get(0));
         assertEquals("sister", getRelation("father's daughter").get(0));
+    }
+
+    @Test
+    public void paternalGrandfathersFamily() {
+        assertEquals("paternal grandfather", getRelation("father's father").get(0));
+        assertEquals("paternal grandmother", getRelation("father's mother").get(0));
+        assertEquals("bua", getRelation("paternal_grandfather's daughter").get(0));
+        assertEquals("chacha", getRelation("paternal_grandfather's son").get(0));
     }
 
     private static List<String> getRelation(String query) {
