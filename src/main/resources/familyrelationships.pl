@@ -1,49 +1,4 @@
-male(james).
-male(john).
-male(robert).
-male(michael).
-male(william).
-male(raghav).
-male(david).
-male(charles).
-male(johnny).
-
-female(mary).
-female(patrica).
-female(linda).
-female(barbara).
-female(elizabeth).
-female(maria).
-female(susan).
-female(katrina).
-
-spouse(james, mary).
-spouse(mary, james).
-spouse(michael, elizabeth).
-spouse(elizabeth, michael).
-spouse(william, patrica).
-spouse(patrica, william).
-spouse(raghav, katrina).
-spouse(katrina, raghav).
-spouse(susan, david).
-spouse(david, susan).
-spouse(johnny, linda).
-spouse(linda, johnny).
-
-spouse(john, barbara).
-spouse(barbara, john).
-
-parent(james, mary, michael).
-parent(james, mary, william).
-parent(james, mary, linda).
-
-parent(john, barbara, elizabeth).
-parent(john, barbara, maria).
-parent(john, barbara, robert).
-
-parent(michael, elizabeth, raghav).
-parent(michael, elizabeth, susan).
-parent(raghav, katrina, charles).
+% Facts
 
 husband(Husband, Woman) :- male(Husband), spouse(Husband, Woman).
 wife(Wife, Man) :- female(Wife), spouse(Wife, Man).
@@ -159,8 +114,6 @@ bhatija(Nephew, Y) :- brother(Brother, Y), son(Nephew, Brother, _).
 bhatiji(Bhatiiji, Y) :- brother(Brother, Y), daughter(Bhatiiji, Brother, _).
 bhanja(Bhanja, Y) :- sister(Sister, Y), son(Bhanja, _, Sister).
 bhanji(Bhanji, Y) :- sister(Sister, Y), daughter(Bhanji, _, Sister).
-
-% jitotee(Jitotee, Y) :- husband(Husband, Y),
 
 find_relation(Relation, X, Y) :-
     member(Relation, [husband, wife, father, mother, son, daughter, sister, brother,
