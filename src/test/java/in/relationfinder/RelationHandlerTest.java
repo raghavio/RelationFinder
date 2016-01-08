@@ -59,6 +59,13 @@ public class RelationHandlerTest {
         assertEquals("bhatiji", getRelation("bhatija's sister").get(0));
     }
 
+    @Test
+    public void sonsFamily() {
+        assertEquals("pota", getRelation("son's son").get(0));
+        assertEquals("poti", getRelation("son's daughter").get(0));
+        assertEquals("daughter-in-law", getRelation("son's wife").get(0));
+    }
+
     private static List<String> getRelation(String query) {
         Object[] data = RelationsHandler.getRelation(query);
         return (List<String>) data[1];
