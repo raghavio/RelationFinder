@@ -42,6 +42,11 @@ male(jason).
 male(jeffery).
 female(sharon).
 
+% Bua's family
+male(gary).
+male(larry).
+female(amy).
+
 % Paternal Grandparents's family
 spouse(robert, jennifer).
 
@@ -65,6 +70,9 @@ spouse(william, rita).
 
 % Daughter's family
 spouse(jason, linda).
+
+% Bua's family
+spouse(gary, elizabeth).
 
 % Grandparents's family
 parent(robert, jennifer, james).
@@ -100,6 +108,10 @@ parent(william, rita, emily).
 % Daughter's family
 parent(jason, linda, jeffery).
 parent(jason, linda, sharon).
+
+% Bua's family
+parent(gary, elizabeth, larry).
+parent(gary, elizabeth, amy).
 
 % RULES
 
@@ -229,13 +241,13 @@ custom_call(Relation, X, Usermale) :-
     member(Usermale, [usermale, userfemale]),
     call(Relation, X, Usermale).
 
-find_relation(Relation, X, Usermale) :-
-    member(Usermale, [usermale, userfemale]),
+find_relation(Relation, X, User) :-
+    member(User, [usermale, userfemale]),
     member(Relation, [husband, wife, father, mother, son, daughter, sister, brother,
                 father_in_law, mother_in_law, son_in_law, daughter_in_law,
                 pota, poti, paternal_grandfather,
                 paternal_grandmother, maternal_grandfather, maternal_grandmother,
                 navaasa, navaasi, bhabhi, jija,
                 sister_in_law, brother_in_law, chacha, chachi, bua, phupha, maama,
-                maami, mausii, mausaa, bhatija, bhatiji, bhanja, bhanji]),
-    call(Relation, X, Usermale).
+                maami, mausii, mausaa, bhatija, bhatiji, bhanja, bhanji, cousin]),
+    call(Relation, X, User).
