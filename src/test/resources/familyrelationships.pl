@@ -237,6 +237,12 @@ bhatiji(Bhatiiji, Y) :- brother(Brother, Y), daughter(Bhatiiji, Brother, _).
 bhanja(Bhanja, Y) :- sister(Sister, Y), son(Bhanja, _, Sister).
 bhanji(Bhanji, Y) :- sister(Sister, Y), daughter(Bhanji, _, Sister).
 
+cousin(Cousin, X) :-
+    bua(Bua, X), parent(_, Bua, Cousin);
+    chacha(Chacha, X), parent(chacha, _, Cousin);
+    mausii(maasi, X), parent(_, maasi, Cousin);
+    maama(Maama, X), parent(maama, _, Cousin).
+
 custom_call(Relation, X, Usermale) :-
     member(Usermale, [usermale, userfemale]),
     call(Relation, X, Usermale).
