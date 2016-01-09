@@ -6,14 +6,14 @@ female(elizabeth).
 
 % Father's family
 male(james).
-male(user).
+male(usermale).
 male(john).
 female(mary).
 female(patricia).
 
 % User's family
 male(william).
-female(neha).
+female(userfemale).
 female(linda).
 
 % Sister's family
@@ -44,7 +44,7 @@ spouse(robert, jennifer).
 spouse(james, mary).
 
 % User's family
-spouse(user, neha).
+spouse(usermale, userfemale).
 
 % Sister's family
 spouse(patricia, david).
@@ -64,13 +64,13 @@ parent(robert, jennifer, michael).
 parent(robert, jennifer, elizabeth).
 
 % Father's family
-parent(james, mary, user).
+parent(james, mary, usermale).
 parent(james, mary, john).
 parent(james, mary, patricia).
 
 % User's family
-parent(user, neha, william).
-parent(user, neha, linda).
+parent(usermale, userfemale, william).
+parent(usermale, userfemale, linda).
 
 % Sister's family
 parent(david, patricia, richard).
@@ -213,12 +213,12 @@ bhatiji(Bhatiiji, Y) :- brother(Brother, Y), daughter(Bhatiiji, Brother, _).
 bhanja(Bhanja, Y) :- sister(Sister, Y), son(Bhanja, _, Sister).
 bhanji(Bhanji, Y) :- sister(Sister, Y), daughter(Bhanji, _, Sister).
 
-custom_call(Relation, X, User) :-
-    member(User, [user, neha]),
-    call(Relation, X, User).
+custom_call(Relation, X, Usermale) :-
+    member(Usermale, [usermale, userfemale]),
+    call(Relation, X, Usermale).
 
-find_relation(Relation, X, User) :-
-    member(User, [user, neha]),
+find_relation(Relation, X, Usermale) :-
+    member(Usermale, [usermale, userfemale]),
     member(Relation, [husband, wife, father, mother, son, daughter, sister, brother,
                 father_in_law, mother_in_law, son_in_law, daughter_in_law,
                 pota, poti, paternal_grandfather,
@@ -226,4 +226,4 @@ find_relation(Relation, X, User) :-
                 navaasa, navaasi, bhabhi, jija,
                 sister_in_law, brother_in_law, chacha, chachi, bua, phupha, maama,
                 maami, mausii, mausaa, bhatija, bhatiji, bhanja, bhanji]),
-    call(Relation, X, User).
+    call(Relation, X, Usermale).
