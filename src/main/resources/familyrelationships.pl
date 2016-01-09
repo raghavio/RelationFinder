@@ -37,6 +37,11 @@ male(kevin).
 female(rita).
 female(emily).
 
+% Daughter's family
+male(jason).
+male(jeffery).
+female(sharon).
+
 % Paternal Grandparents's family
 spouse(robert, jennifer).
 
@@ -57,6 +62,9 @@ spouse(john, lisa).
 
 % Son's family
 spouse(william, rita).
+
+% Daughter's family
+spouse(jason, linda).
 
 % Grandparents's family
 parent(robert, jennifer, james).
@@ -88,6 +96,10 @@ parent(john, lisa, donna).
 % Son's family
 parent(william, rita, kevin).
 parent(william, rita, emily).
+
+% Daughter's family
+parent(jason, linda, jeffery).
+parent(jason, linda, sharon).
 
 % RULES
 
