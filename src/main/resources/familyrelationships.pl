@@ -213,7 +213,12 @@ bhatiji(Bhatiiji, Y) :- brother(Brother, Y), daughter(Bhatiiji, Brother, _).
 bhanja(Bhanja, Y) :- sister(Sister, Y), son(Bhanja, _, Sister).
 bhanji(Bhanji, Y) :- sister(Sister, Y), daughter(Bhanji, _, Sister).
 
-find_relation(Relation, X, Y) :-
+custom_call(Relation, X, User) :-
+    member(User, [user, neha]),
+    call(Relation, X, User).
+
+find_relation(Relation, X, User) :-
+    member(User, [user, neha]),
     member(Relation, [husband, wife, father, mother, son, daughter, sister, brother,
                 father_in_law, mother_in_law, son_in_law, daughter_in_law,
                 pota, poti, paternal_grandfather,
@@ -221,4 +226,4 @@ find_relation(Relation, X, Y) :-
                 navaasa, navaasi, bhabhi, jija,
                 sister_in_law, brother_in_law, chacha, chachi, bua, phupha, maama,
                 maami, mausii, mausaa, bhatija, bhatiji, bhanja, bhanji]),
-    call(Relation, X, Y).
+    call(Relation, X, User).
