@@ -38,3 +38,4 @@ pota: {gender: male}
 poti: {gender: female}
 navaasa: {gender: male, other_names: [dauhitra]}
 navaasi: {gender: female, other_names: [naatin, dauhiti]}
+cousin: {}
