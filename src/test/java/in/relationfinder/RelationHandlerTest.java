@@ -20,6 +20,10 @@ public class RelationHandlerTest {
         assertEquals("mother", getRelation("father's wife").get(0));
         assertEquals("brother", getRelation("brother").get(0));
         assertEquals("sister", getRelation("father's daughter").get(0));
+        assertEquals("father-in-law", getRelation("husband's father").get(0));
+        assertEquals("mother-in-law", getRelation("husband's mother").get(0));
+        assertEquals("brother-in-law", getRelation("husband's brother").get(0));
+        assertEquals("sister-in-law", getRelation("husband's sister").get(0));
     }
 
     @Test
@@ -35,7 +39,6 @@ public class RelationHandlerTest {
         assertEquals("son", getRelation("daughter's brother").get(0));
         assertEquals("daughter", getRelation("son's sister").get(0));
         assertEquals("wife", getRelation("son's mother").get(0));
-        assertEquals("mother-in-law", getRelation("husband's mother").get(0));
     }
 
     @Test
