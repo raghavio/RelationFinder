@@ -251,9 +251,9 @@ bhanji(Bhanji, Y) :- sister(Sister, Y), daughter(Bhanji, _, Sister).
 
 cousin(Cousin, X) :-
     bua(Bua, X), parent(_, Bua, Cousin);
-    chacha(Chacha, X), parent(chacha, _, Cousin);
-    mausii(maasi, X), parent(_, maasi, Cousin);
-    maama(Maama, X), parent(maama, _, Cousin).
+    chacha(Chacha, X), parent(Chacha, _, Cousin);
+    mausii(Maasi, X), parent(_, Maasi, Cousin);
+    maama(Maama, X), parent(Maama, _, Cousin).
 
 custom_call(Relation, X, Usermale) :-
     member(Usermale, [usermale, userfemale]),
