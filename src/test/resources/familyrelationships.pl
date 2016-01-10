@@ -47,6 +47,11 @@ male(gary).
 male(larry).
 female(amy).
 
+% Chacha's family
+male(scott).
+female(virginia).
+female(pamela).
+
 % Paternal Grandparents's family
 spouse(robert, jennifer).
 
@@ -73,6 +78,9 @@ spouse(jason, linda).
 
 % Bua's family
 spouse(gary, elizabeth).
+
+% Chacha's family
+spouse(michael, virginia).
 
 % Grandparents's family
 parent(robert, jennifer, james).
@@ -112,6 +120,10 @@ parent(jason, linda, sharon).
 % Bua's family
 parent(gary, elizabeth, larry).
 parent(gary, elizabeth, amy).
+
+% Chacha's family
+parent(michael, virginia, scott).
+parent(michael, virginia, pamela).
 
 % RULES
 
