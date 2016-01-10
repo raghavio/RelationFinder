@@ -52,6 +52,14 @@ male(scott).
 female(virginia).
 female(pamela).
 
+% Maasi's family
+male(raymond).
+male(dennis).
+female(debra).
+
+
+
+
 % Paternal Grandparents's family
 spouse(robert, jennifer).
 
@@ -81,6 +89,12 @@ spouse(gary, elizabeth).
 
 % Chacha's family
 spouse(michael, virginia).
+
+% Maasi's family
+spouse(nancy, raymond).
+
+
+
 
 % Grandparents's family
 parent(robert, jennifer, james).
@@ -124,6 +138,13 @@ parent(gary, elizabeth, amy).
 % Chacha's family
 parent(michael, virginia, scott).
 parent(michael, virginia, pamela).
+
+% Maasi's family
+parent(raymond, nancy, dennis).
+parent(raymond, nancy, debra).
+
+
+
 
 % RULES
 
