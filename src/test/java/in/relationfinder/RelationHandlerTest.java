@@ -153,15 +153,25 @@ public class RelationHandlerTest {
     @Test
     public void chachasFamily() {
         assertEquals("chachi", getRelationToX("chacha's wife").get(0));
+        assertEquals("bhatija", getRelationToUser("chacha's wife").get(0));
+
         assertEquals("cousin", getRelationToX("chacha's son").get(0));
+        assertEquals("cousin", getRelationToUser("chacha's son").get(0));
+
         assertEquals("cousin", getRelationToX("chacha's daughter").get(0));
+        assertEquals("cousin", getRelationToUser("chacha's daughter").get(0));
     }
 
     @Test
     public void maasisFamily() {
         assertEquals("mausaa", getRelationToX("mausii's husband").get(0));
+        assertEquals("bhanja", getRelationToUser("mausii's husband").get(0));
+
         assertEquals("cousin", getRelationToX("mausii's son").get(0));
+        assertEquals("cousin", getRelationToUser("mausii's son").get(0));
+
         assertEquals("cousin", getRelationToX("mausii's daughter").get(0));
+        assertEquals("cousin", getRelationToUser("mausii's daughter").get(0));
     }
 
     private static List<String> getRelationToX(String query) {
@@ -171,7 +181,6 @@ public class RelationHandlerTest {
 
     private static List<String> getRelationToUser(String query) {
         Object[] data = RelationsHandler.getRelation(query);
-        System.out.println(data[2]);
         return (List<String>) data[2];
     }
 }
