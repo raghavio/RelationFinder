@@ -120,7 +120,6 @@ public class RelationsHandler {
                         .append(", User), find_relation_to_user(RelationUser, User, ").append(alphabet).append(").");
             alphabet++;
         }
-        System.out.println(builder.toString());
         return builder.toString();
     }
 
