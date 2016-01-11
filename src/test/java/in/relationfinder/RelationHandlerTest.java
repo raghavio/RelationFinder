@@ -111,8 +111,16 @@ public class RelationHandlerTest {
     @Test
     public void sonsFamily() {
         assertEquals("pota", getRelationToX("son's son").get(0));
+        assertEquals("paternal grandfather", getRelationToUser("son's son").get(0));
+        assertEquals("paternal grandmother", getRelationToUser("son's son").get(1));
+
         assertEquals("poti", getRelationToX("son's daughter").get(0));
+        assertEquals("paternal grandfather", getRelationToUser("son's daughter").get(0));
+        assertEquals("paternal grandmother", getRelationToUser("son's daughter").get(1));
+
         assertEquals("daughter-in-law", getRelationToX("son's wife").get(0));
+        assertEquals("father-in-law", getRelationToUser("son's wife").get(0));
+        assertEquals("mother-in-law", getRelationToUser("son's wife").get(1));
     }
 
     @Test
