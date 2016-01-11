@@ -2,7 +2,6 @@ package in.relationfinder;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -16,91 +15,111 @@ public class RelationHandlerTest {
 
     @Test
     public void fathersFamily() {
-        assertEquals("father", getRelation("mother's husband").get(0));
-        assertEquals("mother", getRelation("father's wife").get(0));
-        assertEquals("brother", getRelation("brother").get(0));
-        assertEquals("sister", getRelation("father's daughter").get(0));
-        assertEquals("father-in-law", getRelation("husband's father").get(0));
-        assertEquals("mother-in-law", getRelation("husband's mother").get(0));
-        assertEquals("brother-in-law", getRelation("husband's brother").get(0));
-        assertEquals("sister-in-law", getRelation("husband's sister").get(0));
+        assertEquals("father", getRelationToX("mother's husband").get(0));
+        assertEquals("son", getRelationToUser("mother's husband").get(0));
+
+        assertEquals("mother", getRelationToX("father's wife").get(0));
+        assertEquals("son", getRelationToUser("father's wife").get(0));
+
+        assertEquals("brother", getRelationToX("brother").get(0));
+        assertEquals("brother", getRelationToUser("brother").get(0));
+
+        assertEquals("sister", getRelationToX("father's daughter").get(0));
+        assertEquals("brother", getRelationToUser("father's daughter").get(0));
+
+        assertEquals("father-in-law", getRelationToX("husband's father").get(0));
+        assertEquals("daughter-in-law", getRelationToUser("husband's father").get(0));
+
+        assertEquals("mother-in-law", getRelationToX("husband's mother").get(0));
+        assertEquals("daughter-in-law", getRelationToUser("husband's mother").get(0));
+
+        assertEquals("brother-in-law", getRelationToX("husband's brother").get(0));
+        assertEquals("bhabhi", getRelationToUser("husband's brother").get(0));
+
+        assertEquals("sister-in-law", getRelationToX("husband's sister").get(0));
+        assertEquals("bhabhi", getRelationToUser("husband's sister").get(0));
     }
 
     @Test
     public void paternalGrandparentsFamily() {
-        assertEquals("paternal grandfather", getRelation("father's father").get(0));
-        assertEquals("paternal grandmother", getRelation("father's mother").get(0));
-        assertEquals("bua", getRelation("paternal_grandfather's daughter").get(0));
-        assertEquals("chacha", getRelation("paternal_grandfather's son").get(0));
+        assertEquals("paternal grandfather", getRelationToX("father's father").get(0));
+        assertEquals("paternal grandmother", getRelationToX("father's mother").get(0));
+        assertEquals("bua", getRelationToX("paternal_grandfather's daughter").get(0));
+        assertEquals("chacha", getRelationToX("paternal_grandfather's son").get(0));
     }
 
     @Test
     public void usersFamily() {
-        assertEquals("son", getRelation("daughter's brother").get(0));
-        assertEquals("daughter", getRelation("son's sister").get(0));
-        assertEquals("wife", getRelation("son's mother").get(0));
+        assertEquals("son", getRelationToX("daughter's brother").get(0));
+        assertEquals("daughter", getRelationToX("son's sister").get(0));
+        assertEquals("wife", getRelationToX("son's mother").get(0));
     }
 
     @Test
     public void sistersFamily() {
-        assertEquals("jija", getRelation("sister's husband").get(0));
-        assertEquals("bhanja", getRelation("jija's son").get(0));
-        assertEquals("bhanji", getRelation("bhanja's sister").get(0));
+        assertEquals("jija", getRelationToX("sister's husband").get(0));
+        assertEquals("bhanja", getRelationToX("jija's son").get(0));
+        assertEquals("bhanji", getRelationToX("bhanja's sister").get(0));
     }
 
     @Test
     public void maternalGrandparentsFamily() {
-        assertEquals("maternal grandfather", getRelation("mother's father").get(0));
-        assertEquals("maternal grandmother", getRelation("mother's mother").get(0));
-        assertEquals("maama", getRelation("mother's brother").get(0));
-        assertEquals("mausii", getRelation("mother's sister").get(0));
+        assertEquals("maternal grandfather", getRelationToX("mother's father").get(0));
+        assertEquals("maternal grandmother", getRelationToX("mother's mother").get(0));
+        assertEquals("maama", getRelationToX("mother's brother").get(0));
+        assertEquals("mausii", getRelationToX("mother's sister").get(0));
     }
 
     @Test
     public void brothersFamily() {
-        assertEquals("bhabhi", getRelation("brother's wife").get(0));
-        assertEquals("bhatija", getRelation("bhabhi's son").get(0));
-        assertEquals("bhatiji", getRelation("bhatija's sister").get(0));
+        assertEquals("bhabhi", getRelationToX("brother's wife").get(0));
+        assertEquals("bhatija", getRelationToX("bhabhi's son").get(0));
+        assertEquals("bhatiji", getRelationToX("bhatija's sister").get(0));
     }
 
     @Test
     public void sonsFamily() {
-        assertEquals("pota", getRelation("son's son").get(0));
-        assertEquals("poti", getRelation("son's daughter").get(0));
-        assertEquals("daughter-in-law", getRelation("son's wife").get(0));
+        assertEquals("pota", getRelationToX("son's son").get(0));
+        assertEquals("poti", getRelationToX("son's daughter").get(0));
+        assertEquals("daughter-in-law", getRelationToX("son's wife").get(0));
     }
 
     @Test
     public void daughtersFamily() {
-        assertEquals("son-in-law", getRelation("daughter's husband").get(0));
-        assertEquals("navaasa", getRelation("daughter's son").get(0));
-        assertEquals("navaasi", getRelation("daughter's daughter").get(0));
+        assertEquals("son-in-law", getRelationToX("daughter's husband").get(0));
+        assertEquals("navaasa", getRelationToX("daughter's son").get(0));
+        assertEquals("navaasi", getRelationToX("daughter's daughter").get(0));
     }
 
     @Test
     public void buasFamily() {
-        assertEquals("phupha", getRelation("bua's husband").get(0));
-        assertEquals("cousin", getRelation("bua's son").get(0));
-        assertEquals("cousin", getRelation("bua's daughter").get(0));
+        assertEquals("phupha", getRelationToX("bua's husband").get(0));
+        assertEquals("cousin", getRelationToX("bua's son").get(0));
+        assertEquals("cousin", getRelationToX("bua's daughter").get(0));
     }
 
     @Test
     public void chachasFamily() {
-        assertEquals("chachi", getRelation("chacha's wife").get(0));
-        assertEquals("cousin", getRelation("chacha's son").get(0));
-        assertEquals("cousin", getRelation("chacha's daughter").get(0));
+        assertEquals("chachi", getRelationToX("chacha's wife").get(0));
+        assertEquals("cousin", getRelationToX("chacha's son").get(0));
+        assertEquals("cousin", getRelationToX("chacha's daughter").get(0));
     }
 
     @Test
     public void maasisFamily() {
-        assertEquals("mausaa", getRelation("mausii's husband").get(0));
-        assertEquals("cousin", getRelation("mausii's son").get(0));
-        assertEquals("cousin", getRelation("mausii's daughter").get(0));
+        assertEquals("mausaa", getRelationToX("mausii's husband").get(0));
+        assertEquals("cousin", getRelationToX("mausii's son").get(0));
+        assertEquals("cousin", getRelationToX("mausii's daughter").get(0));
     }
 
-    private static List<String> getRelation(String query) {
+    private static List<String> getRelationToX(String query) {
         Object[] data = RelationsHandler.getRelation(query);
         return (List<String>) data[1];
     }
 
+    private static List<String> getRelationToUser(String query) {
+        Object[] data = RelationsHandler.getRelation(query);
+        System.out.println(data[2]);
+        return (List<String>) data[2];
+    }
 }
