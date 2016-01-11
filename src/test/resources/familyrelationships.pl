@@ -266,9 +266,11 @@ mausaa(Mausaa, Y) :- mausii(Mausii, Y), husband(Mausaa, Mausii).
 % Bhatijaa, Bhanja = Nephew
 % Bhatiiji, Bhanji = Niece
 bhatija(Nephew, Y) :- brother(Brother, Y), son(Nephew, Brother, _);
-                     jija(Y, BIL), son(Nephew, BIL, _).
+                     jija(Y, BIL), son(Nephew, BIL, _);
+                     bhabhi(Y, BIL), son(Nephew, BIL, _).
 bhatiji(Bhatiiji, Y) :- brother(Brother, Y), daughter(Bhatiiji, Brother, _);
-                     jija(Y, BIL), daughter(Bhatiiji, BIL, _).
+                     jija(Y, BIL), daughter(Bhatiiji, BIL, _);
+                     bhabhi(Y, BIL), daughter(Bhatiiji, BIL, _).
 bhanja(Bhanja, Y) :- sister(Sister, Y), son(Bhanja, _, Sister).
 bhanji(Bhanji, Y) :- sister(Sister, Y), daughter(Bhanji, _, Sister).
 
