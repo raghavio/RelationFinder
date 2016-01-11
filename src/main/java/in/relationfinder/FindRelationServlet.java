@@ -37,6 +37,7 @@ public class FindRelationServlet extends HttpServlet {
         }
 
         request.setAttribute("results", results);
+        request.setAttribute("relationToUser", data[2]);
         request.setAttribute("gender", gender);
         request.setAttribute("query", raw_query);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("_index.jsp");

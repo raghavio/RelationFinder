@@ -29,7 +29,7 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
         <canvas id="canvas"></canvas>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-block" style="float:none">
             <form action="${pageContext.request.contextPath}/find">
-                <p class="text-center title-text">
+                <p class="text-center title-text" style="margin-bottom: 40px">
                     How is my
                     <input class="title-text query_input_box" type="text" id="query" name="query"
                     <c:if test="${requestScope.query != null}">
@@ -64,6 +64,36 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
                     your
                     <c:forEach var="result" items="${requestScope.results}" varStatus="loop">
                         <b style="text-decoration: underline;">${result.key}</b><c:set var="remaining" value="${results_length - (loop.index+1)}"/>
+                        <c:if test="${remaining > 1}">, </c:if>
+                        <c:if test="${remaining == 1}"> or </c:if>
+                    </c:forEach>
+                    and
+                    <c:set var="results_length" value="${fn:length(requestScope.relationToUser)}"/>
+                    you
+                    <c:choose>
+                        <c:when test="${results_length == 1}">
+                            are
+                            <c:if test="${requestScope.results.containsKey(requestScope.relationToUser[0])}">
+                                also
+                            </c:if>
+                        </c:when>
+                        <c:otherwise>
+                            could be
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${requestScope.gender == 'male'}">
+                            his
+                        </c:when>
+                        <c:when test="${requestScope.gender == 'female'}">
+                            her
+                        </c:when>
+                        <c:otherwise>
+                            their <%-- ?? idk. --%>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:forEach var="result" items="${requestScope.relationToUser}" varStatus="loop">
+                        <b style="text-decoration: underline">${result}</b><c:set var="remaining" value="${results_length - (loop.index+1)}"/>
                         <c:if test="${remaining > 1}">, </c:if>
                         <c:if test="${remaining == 1}"> or </c:if>
                     </c:forEach>.
