@@ -271,8 +271,12 @@ bhatija(Nephew, Y) :- brother(Brother, Y), son(Nephew, Brother, _);
 bhatiji(Bhatiiji, Y) :- brother(Brother, Y), daughter(Bhatiiji, Brother, _);
                      jija(Y, BIL), daughter(Bhatiiji, BIL, _);
                      bhabhi(Y, BIL), daughter(Bhatiiji, BIL, _).
-bhanja(Bhanja, Y) :- sister(Sister, Y), son(Bhanja, _, Sister).
-bhanji(Bhanji, Y) :- sister(Sister, Y), daughter(Bhanji, _, Sister).
+bhanja(Bhanja, Y) :- sister(Sister, Y), son(Bhanja, _, Sister);
+                     jija(Y, SIL), son(Bhanja, _, SIL);
+                     bhabhi(Y, SIL), son(Bhanja, _, SIL).
+bhanji(Bhanji, Y) :- sister(Sister, Y), daughter(Bhanji, _, Sister);
+                     jija(Y, SIL), daughter(Bhanji, _, SIL);
+                     bhabhi(Y, SIL), daughter(Bhanji, _, SIL).
 
 cousin(Cousin, X) :-
     bua(Bua, X), parent(_, Bua, Cousin);
