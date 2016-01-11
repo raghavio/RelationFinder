@@ -99,8 +99,13 @@ public class RelationHandlerTest {
     @Test
     public void brothersFamily() {
         assertEquals("bhabhi", getRelationToX("brother's wife").get(0));
+        assertEquals("brother-in-law", getRelationToUser("brother's wife").get(0));
+
         assertEquals("bhatija", getRelationToX("bhabhi's son").get(0));
+        assertEquals("chacha", getRelationToUser("bhabhi's son").get(0));
+
         assertEquals("bhatiji", getRelationToX("bhatija's sister").get(0));
+        assertEquals("chacha", getRelationToUser("bhatija's sister").get(0));
     }
 
     @Test
