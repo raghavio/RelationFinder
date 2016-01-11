@@ -280,7 +280,7 @@ custom_call(Relation, X, Usermale) :-
     member(Usermale, [usermale, userfemale]),
     call(Relation, X, Usermale).
 
-find_relation(Relation, X, User) :-
+find_relation_to_x(Relation, X, User) :-
     member(User, [usermale, userfemale]),
     member(Relation, [husband, wife, father, mother, son, daughter, sister, brother,
                 father_in_law, mother_in_law, son_in_law, daughter_in_law,
@@ -290,3 +290,14 @@ find_relation(Relation, X, User) :-
                 sister_in_law, brother_in_law, chacha, chachi, bua, phupha, maama,
                 maami, mausii, mausaa, bhatija, bhatiji, bhanja, bhanji, cousin]),
     call(Relation, X, User).
+
+find_relation_to_user(Relation, User, X) :-
+    member(User, [usermale, userfemale]),
+    member(Relation, [husband, wife, father, mother, son, daughter, sister, brother,
+                father_in_law, mother_in_law, son_in_law, daughter_in_law,
+                pota, poti, paternal_grandfather,
+                paternal_grandmother, maternal_grandfather, maternal_grandmother,
+                navaasa, navaasi, bhabhi, jija,
+                sister_in_law, brother_in_law, chacha, chachi, bua, phupha, maama,
+                maami, mausii, mausaa, bhatija, bhatiji, bhanja, bhanji, cousin]),
+    call(Relation, User, X).
