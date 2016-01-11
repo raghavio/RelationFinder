@@ -22,12 +22,13 @@ public class FindRelationServlet extends HttpServlet {
         raw_query = raw_query.toLowerCase();
         Object[] data = RelationsHandler.getRelation(raw_query); // new Object[] {gender, results}
         String gender = (String) data[0];
-        List<String> relations = (List<String>) data[1];
+        List<List<String>> relations = (List<List<String>>) data[1];
 
         HashMap<String, ArrayList<String>> results = null;
         if (relations != null) {
             results = new HashMap<>(relations.size());
-            for (String relation : relations) {
+            for (List<String> relation_chain : relations) {
+                String relation = relation_chain.get(relation_chain.size() - 1);
                 ArrayList<String> otherNames = RelationsHandler.getOtherNames(relation);
                 results.put(relation, otherNames);
             }

@@ -31,7 +31,7 @@ public class RelationsHandler {
         String knowledgeBase = "familyrelationships.pl";
         String[] relations = processQuery(raw_query);
         String prolog_query = generatePrologQuery(relations);
-        List<String> results = null;
+        List<List<String>> results = null;
 
         JIPEngine jipEngine = new JIPEngine();
         try {
@@ -45,11 +45,18 @@ public class RelationsHandler {
                 if (jipTerm == null)
                     break;
                 Hashtable hashtable = jipTerm.getVariablesTable();
-                if (!hashtable.containsKey("Result"))
+                char alphabet = 'B';
+                String result_relation_key = "Result" + ((char) (alphabet + (relations.length - 2)));
+                if (!hashtable.containsKey(result_relation_key))
                     break;
-                String result = hashtable.get("Result").toString();
-                result = processRelation(result);
-                results.add(result);
+                List<String> relation_results = new ArrayList<>(relations.length - 1);
+                relation_results.add(relations[0]);
+                for (int i = 0; i < relations.length - 1; i++) {
+                    String result = processRelation(hashtable.get("Result" + alphabet).toString());
+                    relation_results.add(result);
+                    alphabet++;
+                }
+                results.add(relation_results);
             }
         } catch (JIPSyntaxErrorException e) {
             //TODO Logging
@@ -107,10 +114,15 @@ public class RelationsHandler {
             builder.append(relations[i]).append(", ").append(alphabet).append(", ");
             if (isFirst)
                 builder.append("User), ");
-            else
-                builder.append((char) (alphabet - 1)).append("), ");
-            if (isLast)
-                builder.append("find_relation(Result, ").append(alphabet).append(", User).");
+            else {
+                char previousAlphabet = (char) (alphabet - 1);
+                builder.append(previousAlphabet).append("), find_relation(Result").append(alphabet).append(", ")
+                        .append(alphabet).append(", User)");
+                if (!isLast)
+                    builder.append(", ");
+                else
+                    builder.append(".");
+            }
             alphabet++;
         }
         return builder.toString();
