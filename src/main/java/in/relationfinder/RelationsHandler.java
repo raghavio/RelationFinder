@@ -31,15 +31,18 @@ public class RelationsHandler {
         String knowledgeBase = "familyrelationships.pl";
         String[] relations = processQuery(raw_query);
         String prolog_query = generatePrologQuery(relations);
-        List<String> results = null;
+        List<String> relationToX = null;
+        List<String> relationToUser = null;
 
         JIPEngine jipEngine = new JIPEngine();
         try {
             jipEngine.setSearchPath(Constants.RESOURCES_PATH);
             jipEngine.consultFile(knowledgeBase);
             JIPQuery jipQuery = jipEngine.openSynchronousQuery(prolog_query);
-            if (jipQuery.hasMoreChoicePoints())
-                results = new ArrayList<>();
+            if (jipQuery.hasMoreChoicePoints()) {
+                relationToX = new ArrayList<>();
+                relationToUser = new ArrayList<>();
+            }
             while (jipQuery.hasMoreChoicePoints()) {
                 JIPTerm jipTerm = jipQuery.nextSolution();
                 if (jipTerm == null)
@@ -47,9 +50,12 @@ public class RelationsHandler {
                 Hashtable hashtable = jipTerm.getVariablesTable();
                 if (!hashtable.containsKey("Result"))
                     break;
-                String result = hashtable.get("Result").toString();
-                result = processRelation(result);
-                results.add(result);
+                String relation_to_x = hashtable.get("Result").toString();
+                relation_to_x = processRelation(relation_to_x);
+                String relation_to_user = hashtable.get("RelationUser").toString();
+                relation_to_user = processRelation(relation_to_user);
+                relationToUser.add(relation_to_user);
+                relationToX.add(relation_to_x);
             }
         } catch (JIPSyntaxErrorException e) {
             //TODO Logging
@@ -58,7 +64,7 @@ public class RelationsHandler {
         // We get the last element (The relation user wanted to know) from the query.
         String gender = getGender(relations[relations.length - 1]);
 
-        return new Object[]{gender, results};
+        return new Object[]{gender, relationToX, relationToUser};
     }
 
     /**
@@ -110,9 +116,11 @@ public class RelationsHandler {
             else
                 builder.append((char) (alphabet - 1)).append("), ");
             if (isLast)
-                builder.append("find_relation(Result, ").append(alphabet).append(", User).");
+                builder.append("find_relation_to_x(Result, ").append(alphabet)
+                        .append(", User), find_relation_to_user(RelationUser, User, ").append(alphabet).append(").");
             alphabet++;
         }
+        System.out.println(builder.toString());
         return builder.toString();
     }
 
