@@ -57,6 +57,11 @@ male(raymond).
 male(dennis).
 female(debra).
 
+% Maama's family
+male(antohny).
+female(sandra).
+female(betty).
+
 
 
 
@@ -92,6 +97,9 @@ spouse(michael, virginia).
 
 % Maasi's family
 spouse(nancy, raymond).
+
+% Maama's family
+spouse(charles, sandra).
 
 
 
@@ -142,6 +150,10 @@ parent(michael, virginia, pamela).
 % Maasi's family
 parent(raymond, nancy, dennis).
 parent(raymond, nancy, debra).
+
+% Maama's family
+parent(charles, sandra, antohny).
+parent(charles, sandra, betty).
 
 
 
