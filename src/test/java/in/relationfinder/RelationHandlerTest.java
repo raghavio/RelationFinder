@@ -174,6 +174,18 @@ public class RelationHandlerTest {
         assertEquals("cousin", getRelationToUser("mausii's daughter").get(0));
     }
 
+    @Test
+    public void maamasFamily() {
+        assertEquals("maami", getRelationToX("maama's wife").get(0));
+        assertEquals("bhanja", getRelationToUser("maama's wife").get(0));
+
+        assertEquals("cousin", getRelationToX("maama's son").get(0));
+        assertEquals("cousin", getRelationToUser("maama's son").get(0));
+
+        assertEquals("cousin", getRelationToX("maama's daughter").get(0));
+        assertEquals("cousin", getRelationToUser("maama's daughter").get(0));
+    }
+
     private static List<String> getRelationToX(String query) {
         Object[] data = RelationsHandler.getRelation(query);
         return (List<String>) data[1];
