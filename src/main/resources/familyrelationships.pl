@@ -62,7 +62,11 @@ male(antohny).
 female(sandra).
 female(betty).
 
-
+% Wife's family
+male(henry).
+male(dexter).
+female(charlotte).
+female(judith).
 
 
 % Paternal Grandparents's family
@@ -100,6 +104,9 @@ spouse(nancy, raymond).
 
 % Maama's family
 spouse(charles, sandra).
+
+% Wife's family
+spouse(henry, charlotte).
 
 
 
@@ -154,6 +161,11 @@ parent(raymond, nancy, debra).
 % Maama's family
 parent(charles, sandra, antohny).
 parent(charles, sandra, betty).
+
+% Wife's family
+parent(henry, charlotte, dexter).
+parent(henry, charlotte, userfemale).
+parent(henry, charlotte, judith).
 
 
 
