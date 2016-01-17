@@ -9,11 +9,11 @@ male(james).
 male(usermale).
 male(john).
 female(mary).
-female(patricia).
+female(userfemale).
 
 % User's family
 male(william).
-female(userfemale).
+female(rachel).
 female(linda).
 
 % Sister's family
@@ -76,10 +76,10 @@ spouse(robert, jennifer).
 spouse(james, mary).
 
 % User's family
-spouse(usermale, userfemale).
+spouse(usermale, rachel).
 
 % Sister's family
-spouse(patricia, david).
+spouse(userfemale, david).
 
 % Maternal Grandparent's family
 spouse(joseph, sarah).
@@ -119,15 +119,15 @@ parent(robert, jennifer, elizabeth).
 % Father's family
 parent(james, mary, usermale).
 parent(james, mary, john).
-parent(james, mary, patricia).
+parent(james, mary, userfemale).
 
 % User's family
-parent(usermale, userfemale, william).
-parent(usermale, userfemale, linda).
+parent(usermale, rachel, william).
+parent(usermale, rachel, linda).
 
 % Sister's family
-parent(david, patricia, richard).
-parent(david, patricia, susan).
+parent(david, userfemale, richard).
+parent(david, userfemale, susan).
 
 % Maternal Grandparent's family
 parent(joseph, sarah, charles).
@@ -164,7 +164,7 @@ parent(charles, sandra, betty).
 
 % Wife's family
 parent(henry, charlotte, dexter).
-parent(henry, charlotte, userfemale).
+parent(henry, charlotte, rachel).
 parent(henry, charlotte, judith).
 
 
@@ -308,9 +308,9 @@ cousin(Cousin, X) :-
     mausii(Maasi, X), parent(_, Maasi, Cousin);
     maama(Maama, X), parent(Maama, _, Cousin).
 
-custom_call(Relation, X, Usermale) :-
-    member(Usermale, [usermale, userfemale]),
-    call(Relation, X, Usermale).
+custom_call(Relation, X, User) :-
+    member(User, [usermale, userfemale]),
+    call(Relation, X, User).
 
 find_relation_to_x(Relation, X, User) :-
     member(User, [usermale, userfemale]),
