@@ -1,4 +1,4 @@
-<img src=https://travis-ci.org/RaghavPro/RelationFinder.svg?branch=master/>
+[![Build Status](https://travis-ci.org/RaghavPro/RelationFinder.svg?branch=master)](https://travis-ci.org/RaghavPro/RelationFinder)
 
 # RelationFinder
 Find your relation with someone by telling how others you know are related to them.
