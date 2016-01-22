@@ -14,7 +14,7 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
 
 <html>
 <head>
-    <title>RelationFinder - Find how you're related to others.</title>
+    <title>RelationFinder - Find how you're related to your relatives.</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
@@ -27,6 +27,7 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
 <div class="container">
     <header style="padding-top: 200px;">
         <canvas id="canvas" class="hidden-xs hidden-sm"></canvas>
+
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-block" style="float:none">
             <form action="${pageContext.request.contextPath}/find">
                 <p class="text-center title-text" style="margin-bottom: 40px">
