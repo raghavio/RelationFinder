@@ -26,8 +26,6 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
 <body>
 <div class="container">
     <header style="padding-top: 200px;">
-        <canvas id="canvas" class="hidden-xs hidden-sm"></canvas>
-
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-block" style="float:none">
             <form action="${pageContext.request.contextPath}/find">
                 <p class="text-center title-text" style="margin-bottom: 40px">
