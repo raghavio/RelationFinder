@@ -108,7 +108,6 @@ Can't change name to index.jsp. It doesn't run the servlet on Heroku.
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
-<script src="js/canvas.js"></script>
 <script src="js/jquery.autoresize.js"></script>
 <script>
     $(function () {
